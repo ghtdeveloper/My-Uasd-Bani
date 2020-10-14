@@ -1,0 +1,44 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+    <!-- Se crean los temas personalizados para la App-->
+    <!--Tema Material Desing by EMF Sin toolbar-->
+    <style name="materialDesignbyEMF" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+    <!--************************************************-->
+
+    <!--Tema Material Desing para layout login by EMF Sin toolbar-->
+    <style name="materialDesignbyLogin" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+    <!--************************************************-->
+
+    <!--Tema Material Desing by EMF Con toolbar-->
+    <style name="materialDesignbyEMFToolbar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+
+    <!--Text Input Layout-->
+    <style name="temaInputLayoutLogin" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#FFC107</item>
+        <item name="colorPrimaryDark">#F3D373</item>
+    </style>
+    <!--************************************************-->
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">#FFFFFF</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
+</resources>

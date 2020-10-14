@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My-Uasd-Bani</string>
+
+    <!--Pantalla Login-->
+    <string name="textHintusuario">Usuario</string>
+    <string name="textClave">Contraseña</string>
+    <string name="textAcceder">Acceder</string>
+
+</resources>
