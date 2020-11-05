@@ -8,9 +8,9 @@
     tools:context="vistas.login.ActividadInicioSesion">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutNombreUsuario"
+        android:id="@+id/textInputLayoutCorreoUsuario"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="250dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:textColorHint="@android:color/black"
@@ -22,20 +22,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3">
+        app:layout_constraintTop_toBottomOf="@+id/imageViewIconoApp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtNombreUsuario"
+            android:id="@+id/txtCorreoUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/textHintusuario" />
+            android:hint="@string/textHintCorreo" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutClaveUsuario"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="250dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="42dp"
         android:textColorHint="@android:color/black"
@@ -46,22 +46,27 @@
         app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNombreUsuario">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutCorreoUsuario"
+        app:passwordToggleContentDescription="Mosttrar contraseña"
+        app:passwordToggleDrawable="@drawable/state_visiblty_password"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/primary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtClaveUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/textClave"
-            android:inputType="textPassword|numberPassword" />
+            android:inputType="textVisiblePassword|textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageViewIconoApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:src="@drawable/imagen_app"
+        android:contentDescription="@string/textContentImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -70,15 +75,51 @@
         android:id="@+id/btnAcceder"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/stylebutton"
         android:text="@string/textAcceder"
         android:textColor="@color/color_white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutClaveUsuario" />
+
+    <TextView
+        android:id="@+id/textviewNoRegistrado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/textNoRegistrado"
+        android:textColor="@color/accent"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAcceder" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/textTambienPuedesAcceder"
+        android:textColor="@color/primary_text"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textviewNoRegistrado" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

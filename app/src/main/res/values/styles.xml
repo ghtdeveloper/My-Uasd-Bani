@@ -15,6 +15,12 @@
     </style>
     <!--************************************************-->
 
+    <!--************************************************-->
+    <style name="AppTheme." parent="android:Theme.Material">
+        <item name="android:windowAllowEnterTransitionOverlap">false</item>
+        <item name="android:windowAllowReturnTransitionOverlap">false</item>
+    </style>
+
     <!--Tema Material Desing para layout login by EMF Sin toolbar-->
     <style name="materialDesignbyLogin" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>

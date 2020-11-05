@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ghtdeveloper.my_uasd_bani">
 
+    <!--Permisos App-->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,12 +14,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name="vistas.login.ActividadInicioSesion"
+        <activity
+            android:name="vistas.login.menu_principal.NavMenuPrincipal"
+            android:label="@string/title_activity_nav_menu_principal"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="vistas.registro.ActividadRegistroUsuario"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name="vistas.login.ActividadInicioSesion"
             android:theme="@style/materialDesignbyLogin">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

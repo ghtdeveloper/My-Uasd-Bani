@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_listado_materias">
+
+    <fragment
+        android:id="@+id/nav_listado_materias"
+        android:name="vistas.login.menu_principal.ui.listado_materias_horarios.FragmentoListadoMaterias"
+        android:label="@string/menu_listado_materias_horarios"
+        tools:layout="@layout/fragment_listado_materias" />
+
+    <fragment
+        android:id="@+id/nav_informacion"
+        android:name="vistas.login.menu_principal.ui.informacion.FragmentInformacion"
+        android:label="@string/menu_informacion"
+        tools:layout="@layout/fragmento_informacion" />
+
+    <fragment
+        android:id="@+id/nav_mapa"
+        android:name="vistas.login.menu_principal.ui.mapa_uasd_bani.FragmentMapa"
+        android:label="@string/menu_mapa"
+        tools:layout="@layout/fragment_mapa" />
+
+    <fragment
+        android:id="@+id/nav_mi_perfil"
+        android:name="v.mi.perfil.FragmentoMiPerfil"
+        android:label="@string/menu_mi_perfil"
+        tools:layout="@layout/fragmento_mi_perfil"/>
+</navigation>

@@ -1,9 +1,53 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">My-Uasd-Bani</string>
+    <!--Content Image-->
+    <string name="textContentImage">Content Image</string>
 
     <!--Pantalla Login-->
-    <string name="textHintusuario">Usuario</string>
+    <string name="textHintCorreo">Correo</string>
     <string name="textClave">Contraseña</string>
     <string name="textAcceder">Acceder</string>
+    <string name="textNoRegistrado">¿No estas Registrado? Registraste</string>
+    <string name="textTambienPuedesAcceder">Tambien Puedes Acceder con:</string>
+    <!--Pantalla Registro usuario-->
+    <string name="textToolbarRegistroUsuario">Registro</string>
+    <string name="textRegistroTitulo">Bienvenido</string>
+    <string name="hintTextPrimerNombre">Nombre</string>
+    <string name="hintTextPrimerApellido">Apellido</string>
+    <string name="hintTextCorreo">Correo</string>
+    <string name="hintTextFacultad">Facultad</string>
+    <string name="hintTextCarrera">Carrera</string>
+    <string name="hintTextContraseña">Contraseña</string>
+    <string name="hintTextConfirmarContraseña">Confirmar contraseña</string>
+    <!--Recursos-->
+    <string name="textContentDescription">Content Description</string>
+    <string name="title_activity_nav_menu_principal">NavMenuPrincipal</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <!--Nav Menu-->
+    <string name="menu_listado_materias_horarios">Listado de materias y horarios</string>
+    <string name="menu_informacion">Información</string>
+    <string name="menu_mapa">Mapa UASD-BANI</string>
+    <string name="menu_cerrar_sesion">Cerrar sesión</string>
+    <string name="menu_mi_perfil">Mi Perfil</string>
+    <!--Botones dialogos-->
+    <string name="textAceptarDialogo">Aceptar</string>
+    <string name="textCancelarDialogo">Cancelar</string>
+    <!--Nav Header-->
+    <string name="textNombreCompletoUser">Nombre Completo usuario</string>
+    <string name="textCorreoUsuario">Correo usuario</string>
+    <string name="textOtrosDatosUsuario">Otros datos</string>
 
+    <!--Cerrar Sesion-->
+    <string name="textTituloCerrarSesion">¿Esta seguro que desea cerrar sesión?</string>
+
+    <!--Dialogo Progress Bar-->
+    <string name="textMensajePorgressBar" tools:ignore="Typos">Por favor espere un momento</string>
+    <string name="textProcesandoDialogo">Procesando…</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="listFacultades">
+        <item>Humanidades</item>
+        <item>Ciencias</item>
+        <item>Ciencias Economicas y juridicas</item>
+        <item>Ciencias Juridicas</item>
+        <item>Ingenieria y Arquitectura</item>
+        <item>Ciencias De La Salud</item>
+        <item>Ciencias Agronomicas y Veterinarias</item>
+        <item>Artes</item>
+        <item>Ciencias De  La Educación</item>
+    </string-array>
+</resources>
