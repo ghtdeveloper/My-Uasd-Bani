@@ -23,7 +23,6 @@ public class FragmentInformacion extends Fragment implements  Contratos.VistaFra
 {
     //Vista
     private  View root;
-    private WebView webView;
     //Objetos
     private AlertDialog dialog;
 
@@ -39,22 +38,12 @@ public class FragmentInformacion extends Fragment implements  Contratos.VistaFra
     @Override
     public void init()
     {
-        webView = root.findViewById(R.id.webViewInfo);
+
         //Se carga el dialogo Run Process
-        mostrarRunProcess();
+
     }//Fin del metodo init
 
-    @SuppressLint("SetJavaScriptEnabled")
-    @Override
-    public void cargarWebView()
-    {
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setUseWideViewPort(true);
-        //Variables
-        String URL = "https://www.uasd.edu.do/index.php/informacion-general";
-        webView.loadUrl(URL);
-    }//Fin del metodo cargarWebView
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -64,7 +53,7 @@ public class FragmentInformacion extends Fragment implements  Contratos.VistaFra
         LayoutInflater inflater = getLayoutInflater();
         View viewDialogo = inflater.inflate(R.layout.layout_dialogo_progress_bar,null);
         TextView textViewTituloProgress = viewDialogo.findViewById(R.id.textVieewProcesando);
-        textViewTituloProgress.setText("Obteniendo información.....");
+        textViewTituloProgress.setText("Consultando.....");
         builder.setView(viewDialogo);
         //Cast a las vistas
         Thread thread = new Thread() {
@@ -77,7 +66,6 @@ public class FragmentInformacion extends Fragment implements  Contratos.VistaFra
                         requireActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                cargarWebView();
                                 dialog.dismiss();
                             }
                         });
@@ -92,6 +80,7 @@ public class FragmentInformacion extends Fragment implements  Contratos.VistaFra
         dialog.getLayoutInflater();
         dialog.show();
     }//Fin del metodo mostrarRunProcess
+
 
     @Override
     public void onDestroy() {

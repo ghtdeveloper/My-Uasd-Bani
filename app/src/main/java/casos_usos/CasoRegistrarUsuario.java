@@ -18,7 +18,7 @@ public class CasoRegistrarUsuario
    /**Objetos Firebase**/
    private final CasoUsoEstablecerConexionBD objConexion;
    /**Id Generado por Firebase**/
-   private static String idobtenido;
+    public static String idobtenido;
 
     /**
      * Constructor de la clase

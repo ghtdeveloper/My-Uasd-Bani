@@ -1,8 +1,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_mi_perfil"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="v.mi.perfil.FragmentoMiPerfil">
 
     <ScrollView
@@ -22,9 +23,9 @@
 
 
             <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/imageViewUnknowEstatusOrden"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:id="@+id/imageViewUsuarioProfile"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_marginTop="16dp"
                 android:contentDescription="@string/textContentDescription"
                 android:src="@drawable/img_perfil_unknow"
@@ -32,6 +33,18 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btnEditarImagen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="180dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/textContentImage"
+                android:visibility="invisible"
+                app:layout_constraintStart_toEndOf="@+id/imageViewUsuarioProfile"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_edit_32" />
 
             <TextView
                 android:id="@+id/textViewTituloCarrera"
@@ -75,15 +88,14 @@
                 app:hintEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewUnknowEstatusOrden">
+                app:layout_constraintTop_toBottomOf="@+id/imageViewUsuarioProfile">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtPrimerNombreData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/primary_text"
-                    android:focusable="false"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:textColor="@color/primary_text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -107,9 +119,8 @@
                     android:id="@+id/txtPrimerApellidoConsulta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/primary_text"
-                    android:focusable="false"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:textColor="@color/primary_text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!--Primer correo-->
@@ -134,10 +145,9 @@
                     android:id="@+id/txtCorreoConsulta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/primary_text"
-                    android:focusable="false"
-                    android:enabled="false"/>
+                    android:textColor="@color/primary_text" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -161,6 +171,35 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTituloCarrera" />
+
+            <Button
+                android:id="@+id/btnEditar"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/stylebutton_yellow"
+                android:text="@string/textEditar"
+                android:textColor="@color/color_white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerCarreraConsulta" />
+
+            <Button
+                android:id="@+id/btnActualizar"
+                android:layout_width="145dp"
+                android:visibility="invisible"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/stylebutton_green"
+                android:text="@string/textActualizar"
+                android:textColor="@color/color_white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerCarreraConsulta" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

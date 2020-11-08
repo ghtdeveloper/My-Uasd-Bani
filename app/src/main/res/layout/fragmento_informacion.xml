@@ -5,10 +5,5 @@
     android:layout_height="match_parent"
     tools:context="vistas.login.menu_principal.ui.informacion.FragmentInformacion">
 
-    <WebView
-        android:id="@+id/webViewInfo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="87dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

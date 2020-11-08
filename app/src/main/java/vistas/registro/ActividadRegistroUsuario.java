@@ -1,41 +1,62 @@
 package vistas.registro;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ghtdeveloper.my_uasd_bani.R;
 import com.ghtdeveloper.my_uasd_bani.modelo.Usuarios;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import casos_usos.CasoRegistrarUsuario;
 import contratos.Contratos;
 import herramientas.Transiciones;
 import presentador.Presentador;
 import vistas.login.ActividadInicioSesion;
 
 public class ActividadRegistroUsuario extends AppCompatActivity  implements
-        Contratos.VistaActividadRegistroUsuario, Transiciones
+        Contratos.VistaActividadRegistroUsuario, Transiciones, PopupMenu.OnMenuItemClickListener
 {
     //Vistas
     //EditeTex
@@ -50,15 +71,21 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
     private TextInputLayout textInputLayoutCorreo;
     private TextInputLayout textInputLayoutPassword;
     private TextInputLayout textInputLayoutConfirmPassword;
+    //ImageView
+    private ImageView imageViewUsuario;
     //Spinners
     private Spinner spinnerFacultad;
     private Spinner spinnerCarrera;
     //Objetos
     private  Presentador objPresentador;
     private AlertDialog dialog;
+    private Intent intentRegistroUsuario;
+    private Uri uriImage;
     //Variables
     private static String facultadSelect;
     private static String carreraSelect;
+    private final int REQUEST_CAMERA =0;
+    private final int REQUEST_GALERIA =1;
 
 
     @Override
@@ -94,6 +121,7 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
         textInputLayoutCorreo = findViewById(R.id.textInputLayoutCorreo);
         textInputLayoutPassword = findViewById(R.id.textLayoutClave);
         textInputLayoutConfirmPassword = findViewById(R.id.textLayoutConfirmarClave);
+        imageViewUsuario = findViewById(R.id.imageViewUsuario);
         //Configuracion Toolbar
         Toolbar toolbar = findViewById(R.id.toolbarReg);
         toolbar.setTitle(R.string.textToolbarRegistroUsuario);
@@ -137,8 +165,39 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
         });
+
     }//Fin del metodo init
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        Bitmap bitmapPict;
+        if(requestCode ==REQUEST_CAMERA && resultCode == RESULT_OK)
+        {
+            assert data != null;
+            Bundle bundle = data.getExtras();
+            assert  bundle != null;
+            bitmapPict = (Bitmap) bundle.get("data");
+            imageViewUsuario.setImageBitmap(bitmapPict);
+        }//Fin del if captura camara
+
+        if(requestCode == REQUEST_GALERIA && resultCode == RESULT_OK)
+        {
+            //Uri
+            assert data != null;
+            uriImage = data.getData();
+            assert  uriImage != null;
+            try {
+                bitmapPict = BitmapFactory.decodeStream(getContentResolver()
+                        .openInputStream(uriImage));
+                imageViewUsuario.setImageBitmap(bitmapPict);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }//Fin del if galeria pict
+    }//Fin del metodo onActivityResult
 
     @Override
     public void mostrarActividadLogin()
@@ -287,7 +346,7 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
                 super.run();
                 synchronized (this) {
                     try {
-                        wait(950);
+                        wait(1500);
                          runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -295,6 +354,7 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
                                 mostrarActividadLogin();
                                 Toast.makeText(getApplicationContext(),"Registro completado",
                                         Toast.LENGTH_LONG).show();
+                                subirImagenes();
                             }
                         });
                     } catch (InterruptedException e) {
@@ -309,6 +369,83 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
         dialog.show();
 
     }//Fin del metodo mostrarProgressBar
+
+    @Override
+    public void intentCapturaFoto()
+    {
+        intentRegistroUsuario = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(intentRegistroUsuario.resolveActivity(getPackageManager())!= null)
+        {
+            startActivityForResult(intentRegistroUsuario,REQUEST_CAMERA);
+        }
+    }//Fin del metodo intentCapturaFoto
+
+    @Override
+    public void intentAccesGaleria()
+    {
+        intentRegistroUsuario = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.
+                EXTERNAL_CONTENT_URI);
+        startActivityForResult(intentRegistroUsuario,REQUEST_GALERIA);
+    }//Fin del metodo intentAccesGaleria
+
+    @Override
+    public void showMenuPopup(View view)
+    {
+        PopupMenu popupMenu = new PopupMenu(ActividadRegistroUsuario.this,view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        popupMenu.setOnMenuItemClickListener(this);
+        inflater.inflate(R.menu.menu_imagenes,popupMenu.getMenu());
+        popupMenu.show();
+    }//Fin del metodo showMenuPopu
+
+    @Override
+    public void subirImagenes()
+    {
+        Bitmap bitmapPictUsuario = ((BitmapDrawable) imageViewUsuario.getDrawable()).getBitmap();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmapPictUsuario.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        //Byte Data Imagen
+        byte[] dataPict = byteArrayOutputStream.toByteArray();
+        /*
+            Se realiza la carga de la imagen
+         */
+        UploadTask uploadTask = objPresentador.refenceImagenUsuario(CasoRegistrarUsuario.idobtenido,
+                "PICT_USER"+"_"+CasoRegistrarUsuario.idobtenido)
+                .putBytes(dataPict);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("Error","Error al subir la imagen al storage");
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.w("Exito","Imagen subida exitosamente");
+            }
+        });
+        //Se descarga el URL
+        uploadTask.continueWithTask(new Continuation<UploadTask.
+                TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                return objPresentador.refenceImagenUsuario(CasoRegistrarUsuario.idobtenido,
+                        "PICT_USER"+"_"+CasoRegistrarUsuario.idobtenido).
+                        getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task)
+            {
+                if(task.isSuccessful())
+                {
+                    Uri url = task.getResult();
+                    assert url != null;
+                    String urlPict = url.toString();
+                    objPresentador.actualizarDatos(CasoRegistrarUsuario.idobtenido)
+                            .update("urlFotoPerfil",urlPict);
+                } }
+        });
+    }//Fin del metodo subirImagenes
 
 
     @Override
@@ -332,4 +469,25 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
         super.onDestroy();
         objPresentador = null;
     }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onMenuItemClick(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case  R.id.menuTomarFoto:
+                intentCapturaFoto();
+                return  true;
+
+            case R.id.menuGaleria:
+                intentAccesGaleria();
+                return true;
+
+            default:
+                return  false;
+        }
+    }//Fin del metodo onMenuItemClick
+
+
 }//Fin de la actividad ActividadRegistroUsuario

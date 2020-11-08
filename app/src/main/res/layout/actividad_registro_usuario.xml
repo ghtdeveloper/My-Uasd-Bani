@@ -36,9 +36,9 @@
 
 
             <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/imageViewUnknowEstatusOrden"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:id="@+id/imageViewUsuario"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_marginTop="16dp"
                 android:contentDescription="@string/textContentDescription"
                 android:src="@drawable/img_perfil_unknow"
@@ -89,7 +89,7 @@
                 app:hintEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewUnknowEstatusOrden">
+                app:layout_constraintTop_toBottomOf="@+id/imageViewUsuario">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtPrimerNombre"
@@ -232,6 +232,18 @@
                     android:inputType="textPassword"
                     android:textColor="@color/primary_text" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/btnAgregarImagen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="180dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/textContentImage"
+                android:onClick="showMenuPopup"
+                app:layout_constraintStart_toEndOf="@+id/imageViewUsuario"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_add_circle_24" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

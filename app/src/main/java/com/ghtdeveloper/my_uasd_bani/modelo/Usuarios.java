@@ -1,6 +1,7 @@
 package com.ghtdeveloper.my_uasd_bani.modelo;
 
 import android.content.Context;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
@@ -23,6 +24,7 @@ public class Usuarios
     private String carrera;
     private String claveAcceso;
     private Date fechaRegistro;
+    private String urlFotoPerfil;
 
     /*
         Se define el constructor de la clase
@@ -106,6 +108,15 @@ public class Usuarios
 
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }
+
+
+    public String getUrlFotoPerfil() {
+        return urlFotoPerfil;
+    }
+
+    public void setUrlFotoPerfil(String urlFotoPerfil) {
+        this.urlFotoPerfil = urlFotoPerfil;
     }
 
     ///*****************************************************************************************

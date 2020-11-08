@@ -4,10 +4,12 @@ import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,8 +18,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.bumptech.glide.Glide;
 import com.ghtdeveloper.my_uasd_bani.R;
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
+
 import vistas.login.ActividadInicioSesion;
 
 public class NavMenuPrincipal extends AppCompatActivity {
@@ -26,10 +32,12 @@ public class NavMenuPrincipal extends AppCompatActivity {
     private TextView textViewNombreCompletoUsuario;
     private TextView textViewCorreoUsuario;
     private TextView textViewOtrosDatos;
+    private ImageView imageViewFotoUsuario;
 
     private AppBarConfiguration mAppBarConfiguration;
     //objetos
     private Intent intentMenuPrincipal;
+    private Uri uriPictUsuario;
 
     //Variables
     public static String idUsuario;
@@ -61,9 +69,13 @@ public class NavMenuPrincipal extends AppCompatActivity {
         textViewNombreCompletoUsuario = hView.findViewById(R.id.textNombreCompletoUsuario);
         textViewCorreoUsuario = hView.findViewById(R.id.textCorreoUsuario);
         textViewOtrosDatos = hView.findViewById(R.id.textOtrosDatosUsuario);
+        imageViewFotoUsuario = hView.findViewById(R.id.imageViewPictUsuario);
+
         //Se cargan las informaciones correspondientes
         cargarDatosUsuarioConectado();
 
+        //Se asigna la imagen al perfil del usuario
+        Picasso.with(getApplicationContext()).load(uriPictUsuario).into(imageViewFotoUsuario);
 
         // Cerrar sesion
         navMenu.findItem(R.id.nav_cerrar_sesion).
@@ -90,6 +102,7 @@ public class NavMenuPrincipal extends AppCompatActivity {
        textViewCorreoUsuario.setText(intentMenuPrincipal.getStringExtra("correoUsuario"));
        textViewOtrosDatos.setText(intentMenuPrincipal.getStringExtra("otrosDatos"));
        idUsuario = intentMenuPrincipal.getStringExtra("idUsuario");
+        uriPictUsuario =Uri.parse(intentMenuPrincipal.getStringExtra("urlPict"));
     }//Fin del metodo cargarDatosUsuarioConectado
 
     @Override

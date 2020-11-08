@@ -1,10 +1,14 @@
 package contratos;
 
 import android.content.Context;
+import android.net.Uri;
+import android.view.View;
 
 import com.ghtdeveloper.my_uasd_bani.modelo.Usuarios;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Date;
 
@@ -30,13 +34,16 @@ public interface Contratos
         void cargarListaFacultades();
         void cargarListaCarrera(String facultad);
         void mostrarProgressBar();
+        void intentCapturaFoto();
+        void intentAccesGaleria();
+        void showMenuPopup(View view);
+        void subirImagenes();
 
     }//Fin de la interfaz VistaActividadRegistroUsuario
 
     interface  VistaFragmentoInformacion
     {
         void init();
-        void cargarWebView();
         void mostrarRunProcess();
     }//Fin de la interfaz VistaFragmentoInformacion
 
@@ -47,6 +54,11 @@ public interface Contratos
         void obtenerDataFirebase();
         void cargarListaFacultades();
         void cargarListaCarrera(String facultad);
+        void activarVistas();
+        void actualizarDatos();
+        void showMenuPopUp();
+        void subirImagenes();
+        void mostrarProgressBar();
     }//Fin de la interfaz VistaFragmentoMiPerfil
 
 
@@ -59,6 +71,9 @@ public interface Contratos
         CollectionReference obtenerListadoFacultades();
         CollectionReference obtenerListadoCarreras(String facultad);
         Query obtenerDatosUsuario(String idUsuario);
+        DocumentReference actualizarDatos(String idDocumento);
+        void subirImagenesUsuarios( Uri uriPict);
+        StorageReference refenceImagenUsuario(String idUsaurio,String nombreArchivo);
 
 
     }//Fin de la interfaz Presentador

@@ -2,6 +2,7 @@ package presentador;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -12,20 +13,21 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+import com.google.firebase.storage.StorageReference;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 import casos_usos.CasoRegistrarUsuario;
+import casos_usos.CasoUsoActualizar;
 import casos_usos.CasoUsoConsultas;
 import casos_usos.CasoUsoIniciarSesion;
+import casos_usos.CasoUsoSubirImagenes;
 import contratos.Contratos;
 import vistas.login.menu_principal.NavMenuPrincipal;
 
@@ -38,6 +40,8 @@ public class Presentador extends View implements Contratos.Presentador
     private  static CasoRegistrarUsuario objRegistroUsuario;
     private  static CasoUsoIniciarSesion objInicioSesion;
     private  static CasoUsoConsultas objConsulta;
+    private  static CasoUsoActualizar objActualizar;
+    private  static CasoUsoSubirImagenes objSubirImagenes;
     private static Timestamp timestamp;
     //Objetos Model
     private static  Usuarios objUsuario;
@@ -62,6 +66,8 @@ public class Presentador extends View implements Contratos.Presentador
         timestamp = new Timestamp(System.currentTimeMillis());
         objUsuario = new Usuarios(context);
         objConsulta = new CasoUsoConsultas(context);
+        objActualizar = new CasoUsoActualizar(context);
+        objSubirImagenes = new CasoUsoSubirImagenes(context);
         this.context = context;
 
     }//Fin del metodo init()
@@ -123,6 +129,9 @@ public class Presentador extends View implements Contratos.Presentador
                                             //Se toma el id
                                             objUsuario.setId(queryDocumentSnapshot.getString(
                                                     "id"));
+                                            //Se toma el url de la imagen
+                                            objUsuario.setUrlFotoPerfil(queryDocumentSnapshot.
+                                                    getString("urlFotoPerfil"));
                                         }
                                     }//Fin del if
                                     //Se muestra la pantalla principal
@@ -156,9 +165,26 @@ public class Presentador extends View implements Contratos.Presentador
         return objConsulta.obtenerDatosUsuario(idUsuario);
     }//Fin del metodo
 
+    @Override
+    public DocumentReference actualizarDatos(String idDocumento)
+    {
+        return objActualizar.actualizarDatos(idDocumento);
+    }//Fin del metodo actualizarDatos
+
+    @Override
+    public void subirImagenesUsuarios(Uri uriPict)
+    {
+        objSubirImagenes.subirImagenesPictUsuarios( uriPict);
+    }///Fin del metodo subirImagenesUsuarios
+
+    @Override
+    public StorageReference refenceImagenUsuario(String idUsaurio,String nombreArchivo) {
+        return objSubirImagenes.referencePict(idUsaurio,nombreArchivo);
+    }//Fin del metodo refenceImagenUsuario
+
 
     /*
-            Se muestra la pantalla Principal
+         Se muestra la pantalla Principal
          */
     private void mostrarPantallaPrincipal()
     {
@@ -167,9 +193,10 @@ public class Presentador extends View implements Contratos.Presentador
         intent.putExtra("nombreCompleto",objUsuario.getNombre()+ " "+
                 objUsuario.getApellido());//Nombre Completo usuario
         intent.putExtra("correoUsuario",objUsuario.getCorreo());//Correo
-        intent.putExtra("otrosDatos",objUsuario.getFacultad() + " , "+objUsuario.
+        intent.putExtra("otrosDatos",objUsuario.getFacultad() + "\n"+objUsuario.
                 getCarrera());
         intent.putExtra("idUsuario",objUsuario.getId());
+        intent.putExtra("urlPict",objUsuario.getUrlFotoPerfil());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getContext().startActivity(intent);
     }//Fin del metodo mostrarPantallaPrincipal
@@ -191,17 +218,16 @@ public class Presentador extends View implements Contratos.Presentador
         try{
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] hash = digest.digest(pass.getBytes(StandardCharsets.UTF_8));
-        StringBuffer hexString = new StringBuffer();
-        for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
-            if(hex.length() == 1) hexString.append('0');
-            hexString.append(hex);
-        }
+        StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
         return hexString.toString();
          }   catch(Exception ex){
          throw new RuntimeException(ex);
     }
-
     }//Fin del metodo encodePassword
 
 

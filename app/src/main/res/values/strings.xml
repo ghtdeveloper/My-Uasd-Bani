@@ -7,7 +7,7 @@
     <string name="textHintCorreo">Correo</string>
     <string name="textClave">Contraseña</string>
     <string name="textAcceder">Acceder</string>
-    <string name="textNoRegistrado">¿No estas Registrado? Registraste</string>
+    <string name="textNoRegistrado">¿No estas Registrado?  Registraste</string>
     <string name="textTambienPuedesAcceder">Tambien Puedes Acceder con:</string>
     <!--Pantalla Registro usuario-->
     <string name="textToolbarRegistroUsuario">Registro</string>
@@ -16,6 +16,8 @@
     <string name="hintTextPrimerApellido">Apellido</string>
     <string name="hintTextCorreo">Correo</string>
     <string name="hintTextFacultad">Facultad</string>
+    <string name="textEditar">Editar</string>
+    <string name="textActualizar">Actualizar</string>
     <string name="hintTextCarrera">Carrera</string>
     <string name="hintTextContraseña">Contraseña</string>
     <string name="hintTextConfirmarContraseña">Confirmar contraseña</string>
@@ -50,4 +52,7 @@
     <string name="textProcesandoDialogo">Procesando…</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Menu imagenes-->
+    <string name="menuTomarFoto">Cámara</string>
+    <string name="menuGaleria">Galería </string>
 </resources>

@@ -1,7 +1,5 @@
 package vistas.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
@@ -15,17 +13,14 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.ghtdeveloper.my_uasd_bani.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
 import java.util.Objects;
-
 import contratos.Contratos;
 import herramientas.Transiciones;
 import presentador.Presentador;
-import vistas.login.menu_principal.NavMenuPrincipal;
 import vistas.registro.ActividadRegistroUsuario;
 
 public class ActividadInicioSesion extends AppCompatActivity implements Transiciones,
@@ -92,16 +87,16 @@ public class ActividadInicioSesion extends AppCompatActivity implements Transici
         });
 
         Button btnAcceder = findViewById(R.id.btnAcceder);
-       /* btnAcceder.setOnClickListener(new View.OnClickListener() {
+      /* btnAcceder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
               autenticarUsuario();
             }
-        });
+        });*/
 
-        */
-        mostrarRunProcees();
+
+       mostrarRunProcees();
     }//Fin del metodo init
 
     @Override
@@ -159,9 +154,14 @@ public class ActividadInicioSesion extends AppCompatActivity implements Transici
             {
                 try {
                     Thread.sleep(1700);
+                   /* objPresentador.autenticarUsuario(Objects.requireNonNull(txtCorreo.
+                                    getText()).toString(),
+                            Objects.requireNonNull(txtClave.getText()).toString());*/
+
+                    //Acceso automatico
                     objPresentador.autenticarUsuario("martinezfriasedison@gmail.com",
                             "popy29");
-                    //dialog.dismiss();
+
                     dialog.dismiss();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
