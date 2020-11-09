@@ -44,7 +44,6 @@ public interface Contratos
     interface  VistaFragmentoInformacion
     {
         void init();
-        void mostrarRunProcess();
     }//Fin de la interfaz VistaFragmentoInformacion
 
 

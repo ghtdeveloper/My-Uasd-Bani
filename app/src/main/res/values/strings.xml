@@ -55,4 +55,14 @@
     <!--Menu imagenes-->
     <string name="menuTomarFoto">Cámara</string>
     <string name="menuGaleria">Galería </string>
+    <!--Informacion-->
+    <string name="textInfoNoticiasUASD">Noticias UASD</string>
+    <string name="textInfoEstudianteUASD">Información estudiantes</string>
+    <string name="textSeleccNoticia">Seleccione el tipo de noticias que le interesa visualizar
+    </string>
+    <string name="textInfoTextUasd1">FACULTAD DE ARTES ASUPICIA CONGRESO INTERNACIONAL
+    DE ARTES VISUALES</string>
+    <string name="textInfoTextUasd2">FACULTAD DE ARTES CELEBRA SUS 20 AÑOS DE FUNDACION</string>
+    <string name="textInfoTextUasd3">AUTORIDADES FCS JURAMENTAN NUEVA DIRECTORA ESCUELA
+    DE BIOANÁLISIS-UASD</string>
 </resources>
