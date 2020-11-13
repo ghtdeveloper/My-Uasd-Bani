@@ -61,6 +61,18 @@ public interface Contratos
     }//Fin de la interfaz VistaFragmentoMiPerfil
 
 
+    interface VistaFragmentoListadoMaterias
+    {
+        void init();
+        void cargarRecyClerView();
+        void mostrarDialogoSelectFiltro();
+        void mostrarDialogoFiltroPrincipal();
+        void cargarListaFacultades();
+        void cargarListaDocentes();
+        void cargarRecyclerViewFilter(String value);
+    }//Fin de la interfaz VistaFragmentoListadoMaterias
+
+
     interface Presentador
     {
         void init(Context context);//Para inicializar los objetos
@@ -73,8 +85,8 @@ public interface Contratos
         DocumentReference actualizarDatos(String idDocumento);
         void subirImagenesUsuarios( Uri uriPict);
         StorageReference refenceImagenUsuario(String idUsaurio,String nombreArchivo);
-
-
+        Query obtenerListadoMaterias(String facultad);
+        Query obtenerListadoMateriasxDocente(String facultad, String docente);
     }//Fin de la interfaz Presentador
 
 

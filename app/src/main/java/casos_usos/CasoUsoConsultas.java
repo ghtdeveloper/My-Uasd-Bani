@@ -48,6 +48,8 @@ public class CasoUsoConsultas
                 .document(facultad).collection("collect_carreras");
     }//Fin del metodo obtenerListadoCarreras
 
+
+
     /*
         Se define el metodo para realizar la consulta del usaurio
      */
@@ -59,6 +61,31 @@ public class CasoUsoConsultas
                 .whereEqualTo("id",idUsuario);
     }//Fin del metodo obtenerDatosUsuario
 
+
+    /*
+        Se define el query para la consulta del listado de las materias utilizando como parametro
+        la facultad
+     */
+    public Query obtenerListadoMaterias(String valueFacultad )
+    {
+        Log.w(TAG,"Listado Materias x facultad");
+        return  objConexion.conexion().collection("Collect_Ajust_App")
+                .document("Facultades").collection("Collect_Facultades")
+                .document(valueFacultad).collection("collect_materias");
+    }//Fin del metodo obtenerListadoMaterias
+
+    /*
+    Se define el query para la consulta del listado de las materias utilizando como parametro
+    el nombre del docente
+     */
+    public Query obtenerListadoMateriasxDocente(String facultad,String profesor)
+    {
+        Log.w(TAG,"Listado Materias x docentes");
+        return  objConexion.conexion().collection("Collect_Ajust_App")
+                .document("Facultades").collection("Collect_Facultades")
+                .document(facultad).collection("collect_materias")
+                .whereEqualTo("profesor",profesor);
+    }//Fin del metodo obtenerListadoMateriasxDocente
 
 
 }//Fin del metodo CasoUsoConsultas

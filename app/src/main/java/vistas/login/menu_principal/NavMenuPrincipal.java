@@ -41,6 +41,7 @@ public class NavMenuPrincipal extends AppCompatActivity {
 
     //Variables
     public static String idUsuario;
+    public static String facultadUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +104,7 @@ public class NavMenuPrincipal extends AppCompatActivity {
        textViewOtrosDatos.setText(intentMenuPrincipal.getStringExtra("otrosDatos"));
        idUsuario = intentMenuPrincipal.getStringExtra("idUsuario");
         uriPictUsuario =Uri.parse(intentMenuPrincipal.getStringExtra("urlPict"));
+        facultadUsuario = intentMenuPrincipal.getStringExtra("facultadUsuario");
     }//Fin del metodo cargarDatosUsuarioConectado
 
     @Override

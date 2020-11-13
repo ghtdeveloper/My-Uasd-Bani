@@ -182,6 +182,18 @@ public class Presentador extends View implements Contratos.Presentador
         return objSubirImagenes.referencePict(idUsaurio,nombreArchivo);
     }//Fin del metodo refenceImagenUsuario
 
+    @Override
+    public Query obtenerListadoMaterias(String facultad)
+    {
+        return objConsulta.obtenerListadoMaterias(facultad);
+    }//Fin del metodo obtenerListadoMaterias
+
+    @Override
+    public Query obtenerListadoMateriasxDocente(String facultad, String docente)
+    {
+        return objConsulta.obtenerListadoMateriasxDocente(facultad, docente);
+    }//Fin del metodo obtenerListadoMateriasxDocente
+
 
     /*
          Se muestra la pantalla Principal
@@ -195,6 +207,7 @@ public class Presentador extends View implements Contratos.Presentador
         intent.putExtra("correoUsuario",objUsuario.getCorreo());//Correo
         intent.putExtra("otrosDatos",objUsuario.getFacultad() + "\n"+objUsuario.
                 getCarrera());
+        intent.putExtra("facultadUsuario",objUsuario.getFacultad());
         intent.putExtra("idUsuario",objUsuario.getId());
         intent.putExtra("urlPict",objUsuario.getUrlFotoPerfil());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -25,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -44,18 +43,14 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Objects;
-
-import casos_usos.CasoRegistrarUsuario;
 import contratos.Contratos;
 import presentador.Presentador;
 import vistas.login.ActividadInicioSesion;
 import vistas.login.menu_principal.NavMenuPrincipal;
-import vistas.registro.ActividadRegistroUsuario;
 
 
 public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragmentoMiPerfil,
@@ -83,7 +78,6 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
     //Objetos
     private Presentador objPresentador;
     private Uri uriImageProfile;
-    private Uri uriImageIntent;
     private Intent intent;
     private AlertDialog dialog;
 
@@ -239,8 +233,7 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
                             String idDocumentos = documentSnapshot.getId();
                             listFacultades.add(idDocumentos);
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                                    getContext(), android.
-                                    R.layout.simple_list_item_1,
+                                    requireContext(), R.layout.spinner_style,
                                     listFacultades);
                             adapter.setDropDownViewResource(android.R.layout.
                                     simple_spinner_dropdown_item);
@@ -267,8 +260,8 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
                             String idDocumentos = documentSnapshot.getId();
                             listCarreras.add(idDocumentos);
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                                    getContext(),
-                                    android.R.layout.simple_list_item_1,listCarreras);
+                                    requireContext(),
+                                    R.layout.spinner_style,listCarreras);
                             adapter.setDropDownViewResource(android.R.layout.
                                     simple_spinner_dropdown_item);
                             spinnerCarrera.setAdapter(adapter);
@@ -388,7 +381,7 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
             uriImageProfile = data.getData();
             assert  uriImageProfile != null;
             try {
-                bitmapPict = BitmapFactory.decodeStream(getActivity().getContentResolver()
+                bitmapPict = BitmapFactory.decodeStream(requireActivity().getContentResolver()
                 .openInputStream(uriImageProfile));
                 imageViewFotoPerfil.setImageBitmap(bitmapPict);
             } catch (FileNotFoundException e) {
@@ -471,7 +464,7 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
                 synchronized (this) {
                     try {
                         wait(1500);
-                        getActivity().runOnUiThread(new Runnable() {
+                        requireActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 dialog.dismiss();

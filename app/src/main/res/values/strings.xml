@@ -43,10 +43,8 @@
     <string name="textNombreCompletoUser">Nombre Completo usuario</string>
     <string name="textCorreoUsuario">Correo usuario</string>
     <string name="textOtrosDatosUsuario">Otros datos</string>
-
     <!--Cerrar Sesion-->
     <string name="textTituloCerrarSesion">¿Esta seguro que desea cerrar sesión?</string>
-
     <!--Dialogo Progress Bar-->
     <string name="textMensajePorgressBar" tools:ignore="Typos">Por favor espere un momento</string>
     <string name="textProcesandoDialogo">Procesando…</string>
@@ -65,4 +63,24 @@
     <string name="textInfoTextUasd2">FACULTAD DE ARTES CELEBRA SUS 20 AÑOS DE FUNDACION</string>
     <string name="textInfoTextUasd3">AUTORIDADES FCS JURAMENTAN NUEVA DIRECTORA ESCUELA
     DE BIOANÁLISIS-UASD</string>
+    <!--Listado de materias y horarios-->
+    <string name="textTituloMateria">Materia:</string>
+    <string name="textValueMateria">"@materia"</string>
+    <string name="textTituloProfesor" tools:ignore="Typos">Profesor:</string>
+    <string name="textValueProfesor" tools:ignore="Typos">"@profesor"</string>
+    <string name="textTituloSeccion">Sección:</string>
+    <string name="textValueSeccion">"@seccion"</string>
+    <string name="textTituloLugar">Lugar:</string>
+    <string name="textValueLugar">"@lugar"</string>
+    <string name="textTituloAula">Aula:</string>
+    <string name="textValueAula">"@aula"</string>
+    <string name="textVerUbicacion">Ver ubicación</string>
+    <string name="textTituloFacultadCarrera">Materias:Facultad:</string>
+    <!--Filtro Reporte-->
+    <string name="textTituloDialogoFiltroRpt">Favor seleccionar el tipo de filtro que deseas aplicar
+    </string>
+    <string name="textFiltrarxFacultad">Facultad</string>
+    <string name="textSiguiente">Siguiente</string>
+    <string name="textFiltroTituloPrincipal">Filtrar por @nombreFiltro</string>
+    <string name="textBtnAplicar">Aplicar</string>
 </resources>
