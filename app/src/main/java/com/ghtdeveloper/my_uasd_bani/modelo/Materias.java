@@ -5,8 +5,8 @@ package com.ghtdeveloper.my_uasd_bani.modelo;
  **/
 public class Materias
 {
-
     //Variables
+    private String id;
     private String materia;
     private String profesor;
     private String seccion;
@@ -55,6 +55,14 @@ public class Materias
 
     public void setAula(String aula) {
         this.aula = aula;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 }//Fin de la clase  Materias

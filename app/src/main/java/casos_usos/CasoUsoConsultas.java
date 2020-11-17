@@ -87,5 +87,20 @@ public class CasoUsoConsultas
                 .whereEqualTo("profesor",profesor);
     }//Fin del metodo obtenerListadoMateriasxDocente
 
+    /*
+        Se define el metodo para obtener los puntos de geolocalizacion  donde se imparte la materia
+        segun  el id de la misma
+     */
+
+    public  Query obtenerPuntoGeografico(String facultad,String id)
+    {
+        Log.w(TAG,"Datos geografico lugar materia");
+        return  objConexion.conexion().collection("Collect_Ajust_App")
+                .document("Facultades").collection("Collect_Facultades")
+                .document(facultad).collection("collect_materias")
+                .whereEqualTo("id",id);
+    }//Fin del metodo obtenerPuntoGeografico
+
+
 
 }//Fin del metodo CasoUsoConsultas

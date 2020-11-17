@@ -1,0 +1,11 @@
+<!--
+  ~ Copyright (c) App desarrollada para el monografico #40 de la Universidad Autonoma De Santo Domingo
+  ~ Todos los derechos reservados se restrigen el uso de esta App sin el consentimiento de los desarrolladores o de las partes interesadas
+  ~ Santo Domingo, Republica Dominicana
+  -->
+
+<vector android:height="26dp" android:tint="#FCF6FF"
+    android:viewportHeight="24.0" android:viewportWidth="24.0"
+    android:width="26dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#FF000000" android:pathData="M20,11H7.83l5.59,-5.59L12,4l-8,8 8,8 1.41,-1.41L7.83,13H20v-2z"/>
+</vector>

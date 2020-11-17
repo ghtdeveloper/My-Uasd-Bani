@@ -16,6 +16,11 @@ import adaptadores_vistas.AdaptadorVistaListItem;
  **/
 public class AdaptadorListMaterias extends FirestoreRecyclerAdapter<Materias, AdaptadorVistaListItem>
 {
+    //Interfaz
+    private onItemClickCoordenadas onItemClickCoordenadas;
+    //Variables
+    private String idMateria;
+
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
      * FirestoreRecyclerOptions} for configuration options.
@@ -27,9 +32,20 @@ public class AdaptadorListMaterias extends FirestoreRecyclerAdapter<Materias, Ad
         super(options);
     }//Fin del constructor de la clase
 
+
+    /*
+        Se define la interfaz para el evento OnCLick
+     */
+    public interface  onItemClickCoordenadas
+    {
+        void onItemClick(int posicion);
+    }//Fin de la interfaz onItemClickCoordenadas
+
+
+
     @Override
-    protected void onBindViewHolder(@NonNull AdaptadorVistaListItem holder, int position,
-                                    @NonNull Materias model)
+    protected void onBindViewHolder(@NonNull AdaptadorVistaListItem holder, final int position,
+                                    @NonNull final Materias model)
     {
         holder.txtMateria.setText(model.getMateria());
         holder.txtProfesor.setText(model.getProfesor());
@@ -40,7 +56,8 @@ public class AdaptadorListMaterias extends FirestoreRecyclerAdapter<Materias, Ad
         holder.btnVerGps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.w("Click","Accediendo al gps");
+                setIdMateria(model.getId());
+               onItemClickCoordenadas.onItemClick(position);
             }
         });
     }//Fin del metodo onBindViewHolder
@@ -53,5 +70,23 @@ public class AdaptadorListMaterias extends FirestoreRecyclerAdapter<Materias, Ad
                 parent,false);
         return new AdaptadorVistaListItem(view);
     }//Fin del metodo  AdaptadorVistaListItem
+
+    //Gettes & Setters
+    public void setOnItemClickCoordenadas(AdaptadorListMaterias.onItemClickCoordenadas
+                                                  onItemClickCoordenadas)
+    {
+        this.onItemClickCoordenadas = onItemClickCoordenadas;
+    }//Fin del metodo setOnItemClickCoordenadas
+
+    public String getIdMateria()
+    {
+        return idMateria;
+    }//Fin del metodo getIdMateria
+
+    public void setIdMateria(String idMateria)
+    {
+        this.idMateria = idMateria;
+    }//Fin del metodo setIdMateria
+
 
 }//Fin de la clase AdaptadorListMaterias

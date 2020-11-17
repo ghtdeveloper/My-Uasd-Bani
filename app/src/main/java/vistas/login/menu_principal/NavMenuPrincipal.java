@@ -11,8 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -33,7 +36,7 @@ public class NavMenuPrincipal extends AppCompatActivity {
     private TextView textViewCorreoUsuario;
     private TextView textViewOtrosDatos;
     private ImageView imageViewFotoUsuario;
-
+    private  Toolbar toolbar;
     private AppBarConfiguration mAppBarConfiguration;
     //objetos
     private Intent intentMenuPrincipal;
@@ -47,11 +50,25 @@ public class NavMenuPrincipal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_menu_principal);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        /*Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
+
+
+        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        final ActionBarDrawerToggle drawerAction = new ActionBarDrawerToggle
+                (this, drawer, toolbar, R.string.btnOpen,
+                        R.string.btnClose);
+        drawerAction.setDrawerIndicatorEnabled(false);
+        drawerAction.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawer.openDrawer(GravityCompat.START);
+                drawerAction.setHomeAsUpIndicator(R.drawable.ic_menu_white_24);
+            }
+        });
 
         Menu navMenu = navigationView.getMenu();
         View hView = navigationView.getHeaderView(0);
@@ -64,7 +81,7 @@ public class NavMenuPrincipal extends AppCompatActivity {
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+     //   NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         //Datos Usuario Conectado
         textViewNombreCompletoUsuario = hView.findViewById(R.id.textNombreCompletoUsuario);

@@ -194,6 +194,11 @@ public class Presentador extends View implements Contratos.Presentador
         return objConsulta.obtenerListadoMateriasxDocente(facultad, docente);
     }//Fin del metodo obtenerListadoMateriasxDocente
 
+    @Override
+    public Query datosCoordenadasMateria(String facultad, String id)
+    {
+        return objConsulta.obtenerPuntoGeografico(facultad, id);
+    }//Fin del metodo datosCoordenadasMateria
 
     /*
          Se muestra la pantalla Principal

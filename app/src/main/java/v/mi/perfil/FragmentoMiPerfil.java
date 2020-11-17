@@ -27,6 +27,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import com.ghtdeveloper.my_uasd_bani.R;
 import com.google.android.gms.tasks.Continuation;
@@ -113,6 +115,22 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
         btnActualizarCampos = root.findViewById(R.id.btnActualizar);
         btnEditarFotoPerfil = root.findViewById(R.id.btnEditarImagen);
         imageViewFotoPerfil = root.findViewById(R.id.imageViewUsuarioProfile);
+        Toolbar toolbarMiPerfil = root.findViewById(R.id.toolbarMiPerfil);
+        //Configuracion Toolbar
+        ((AppCompatActivity) requireActivity())
+                .setSupportActionBar(toolbarMiPerfil);
+        //Texto Toolbar
+
+        Objects.requireNonNull(((AppCompatActivity) requireActivity())
+                .getSupportActionBar()).setTitle("Mi Perfil");
+        //Icono Toolbar
+        Objects.requireNonNull(((AppCompatActivity)
+                requireActivity()).getSupportActionBar())
+                .setHomeAsUpIndicator(R.drawable.ic_menu_white_24);
+        //Se habilita el boton de retroceder
+        Objects.requireNonNull(((AppCompatActivity)
+                requireActivity()).getSupportActionBar())
+                .setDisplayHomeAsUpEnabled(true);
 
         //Se carga la data
         obtenerDataFirebase();

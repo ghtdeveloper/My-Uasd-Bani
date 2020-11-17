@@ -9,12 +9,16 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.ghtdeveloper.my_uasd_bani.R;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Objects;
 
 import adaptadores.AdaptadorColeccionPagInfoUASD;
 import adaptadores.AdaptadorColeccionPaginaInfoEstudiante;
@@ -52,7 +56,22 @@ public class FragmentInformacion extends Fragment implements  Contratos.VistaFra
         final Chip chipInfoEstudiateUASD = root.findViewById(R.id.chipInfoEstudianteUASd);
         final ViewPager viewPager  = root.findViewById(R.id.viewPagerInfo);
         final TabLayout tabLayout = root.findViewById(R.id.tabls_layout_ViewPager);
+        Toolbar toolbarInformacion = root.findViewById(R.id.toolbarInformacion);
+        //Configuracion Toolbar
+        ((AppCompatActivity) requireActivity())
+                .setSupportActionBar(toolbarInformacion);
+        //Texto Toolbar
 
+        Objects.requireNonNull(((AppCompatActivity) requireActivity())
+                .getSupportActionBar()).setTitle("Información");
+        //Icono Toolbar
+        Objects.requireNonNull(((AppCompatActivity)
+                requireActivity()).getSupportActionBar())
+                .setHomeAsUpIndicator(R.drawable.ic_menu_white_24);
+        //Se habilita el boton de retroceder
+        Objects.requireNonNull(((AppCompatActivity)
+                requireActivity()).getSupportActionBar())
+                .setDisplayHomeAsUpEnabled(true);
         //Listeners
         chipInfoNoticiasUASD.setOnCheckedChangeListener(new CompoundButton.
                 OnCheckedChangeListener() {

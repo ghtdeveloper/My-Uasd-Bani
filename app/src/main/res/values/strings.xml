@@ -50,6 +50,9 @@
     <string name="textProcesandoDialogo">Procesando…</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Btn Menu-->
+    <string name="btnOpen">Abierto</string>
+    <string name="btnClose">Cerrado</string>
     <!--Menu imagenes-->
     <string name="menuTomarFoto">Cámara</string>
     <string name="menuGaleria">Galería </string>
@@ -83,4 +86,6 @@
     <string name="textSiguiente">Siguiente</string>
     <string name="textFiltroTituloPrincipal">Filtrar por @nombreFiltro</string>
     <string name="textBtnAplicar">Aplicar</string>
+    <!--Mapa busqueda Lugares-->
+    <string name="textHintLugarBusqueda">Seleccione el lugar o ubicacion</string>
 </resources>

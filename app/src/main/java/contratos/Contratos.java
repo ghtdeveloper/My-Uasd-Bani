@@ -46,6 +46,19 @@ public interface Contratos
         void init();
     }//Fin de la interfaz VistaFragmentoInformacion
 
+    interface  VistaFragmentoMapa
+    {
+        void init();
+    }//Fin de la interfaz VistaFragmentoMapa
+
+    interface  VistaFragmentoMapaDetail
+    {
+        void init(View view);
+        void mostrarFragmentoAnterior();
+        String getIdMateria();
+        String getFacultad();
+    }//Fin de la interfaz VistaFragmentoMapaDetail
+
 
     interface  VistaFragmentoMiPerfil
     {
@@ -87,6 +100,7 @@ public interface Contratos
         StorageReference refenceImagenUsuario(String idUsaurio,String nombreArchivo);
         Query obtenerListadoMaterias(String facultad);
         Query obtenerListadoMateriasxDocente(String facultad, String docente);
+        Query datosCoordenadasMateria(String facultad, String id);
     }//Fin de la interfaz Presentador
 
 

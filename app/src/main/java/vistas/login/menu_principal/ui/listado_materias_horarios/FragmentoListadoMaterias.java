@@ -2,6 +2,8 @@ package vistas.login.menu_principal.ui.listado_materias_horarios;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +14,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,27 +41,32 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import adaptadores.AdaptadorListMaterias;
+import adaptadores.detail_map.FragmentoMapaDetail;
 import contratos.Contratos;
 import presentador.Presentador;
 import vistas.login.menu_principal.NavMenuPrincipal;
 
 
 public class FragmentoListadoMaterias extends Fragment implements Contratos.
-        VistaFragmentoListadoMaterias
+        VistaFragmentoListadoMaterias,AdaptadorListMaterias.onItemClickCoordenadas
 {
     //Vista
     private  View root;
     private RecyclerView recyclerViewListMaterias;
     private TextView textViewTituloFacultad;
     private Spinner spinnerValorFiltro;
+    private FloatingActionButton btnFiltro;
     //Objetos
     private AdaptadorListMaterias objAdaptador;
     private Presentador objPresentador;
     private FirestoreRecyclerOptions<Materias> options;
     private AlertDialog dialog;
+    private SharedPreferences.Editor editor;
+    private  SharedPreferences preferences;
     //Variables
     private String tipoFiltro;
     private String valueFiltroSpinner;
+    private String valuePreference;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -67,6 +79,8 @@ public class FragmentoListadoMaterias extends Fragment implements Contratos.
                 container, false);
         //Se inicializan los objetos
         objPresentador = new Presentador(getContext());
+        preferences  = requireActivity().getSharedPreferences(
+                "filtroFacultad",Context.MODE_PRIVATE);
         //Cast a las vistas
         init();
         return root;
@@ -82,11 +96,27 @@ public class FragmentoListadoMaterias extends Fragment implements Contratos.
     @Override
     public void init()
     {
-        FloatingActionButton btnFiltro = root.findViewById(R.id.btnFiltro);
+         btnFiltro = root.findViewById(R.id.btnFiltro);
         recyclerViewListMaterias = root.findViewById(R.id.recyclerViewListMateriasHorarios);
         textViewTituloFacultad = root.findViewById(R.id.textViewTituloFacultad);
         //Configuracion RecyclerView
         recyclerViewListMaterias.setLayoutManager(new LinearLayoutManager(getContext()));
+        Toolbar toolbarListMaterias = root.findViewById(R.id.toolbarListMaterias);
+        //Configuracion Toolbar
+        ((AppCompatActivity) requireActivity())
+                .setSupportActionBar(toolbarListMaterias);
+        //Texto Toolbar
+
+        Objects.requireNonNull(((AppCompatActivity) requireActivity())
+                .getSupportActionBar()).setTitle("Listado de materias y horarios");
+        //Icono Toolbar
+        Objects.requireNonNull(((AppCompatActivity)
+                requireActivity()).getSupportActionBar())
+                .setHomeAsUpIndicator(R.drawable.ic_menu_white_24);
+        //Se habilita el boton de retroceder
+        Objects.requireNonNull(((AppCompatActivity)
+                requireActivity()).getSupportActionBar())
+                .setDisplayHomeAsUpEnabled(true);
 
         //Listeners
         btnFiltro.setOnClickListener(new View.OnClickListener() {
@@ -102,11 +132,13 @@ public class FragmentoListadoMaterias extends Fragment implements Contratos.
     public void cargarRecyClerView()
     {
         //Set Adaptador primero
-        textViewTituloFacultad.setText("Materias: Facultad: "+ NavMenuPrincipal.facultadUsuario);
+        valuePreference = preferences.getString("valorFacultad","no especificado");
+        textViewTituloFacultad.setText("Materias: Facultad: "+valuePreference);
         options = new FirestoreRecyclerOptions.Builder<Materias>()
-                .setQuery(objPresentador.obtenerListadoMaterias(NavMenuPrincipal.facultadUsuario),
+                .setQuery(objPresentador.obtenerListadoMaterias(valuePreference),
                         Materias.class).build();
         objAdaptador = new AdaptadorListMaterias(options);
+        objAdaptador.setOnItemClickCoordenadas(this);
         recyclerViewListMaterias.setAdapter(objAdaptador);
         objAdaptador.startListening();
     }//Fin del metodo cargarRecyClerView
@@ -119,6 +151,7 @@ public class FragmentoListadoMaterias extends Fragment implements Contratos.
                 .setQuery(objPresentador.obtenerListadoMaterias(value),
                         Materias.class).build();
         objAdaptador = new AdaptadorListMaterias(options);
+        objAdaptador.setOnItemClickCoordenadas(this);
         recyclerViewListMaterias.setAdapter(objAdaptador);
         objAdaptador.startListening();
     }//Fin del metodo cargarRecyclerViewFilter
@@ -132,6 +165,7 @@ public class FragmentoListadoMaterias extends Fragment implements Contratos.
                                 facultadUsuario,docente),
                         Materias.class).build();
         objAdaptador = new AdaptadorListMaterias(options);
+        objAdaptador.setOnItemClickCoordenadas(this);
         recyclerViewListMaterias.setAdapter(objAdaptador);
         objAdaptador.startListening();
     }//Fin del metodo cargarRecyclerViewFilterxDocente
@@ -190,6 +224,7 @@ public class FragmentoListadoMaterias extends Fragment implements Contratos.
     @Override
     public void mostrarDialogoFiltroPrincipal()
     {
+        editor = preferences.edit();//Editor
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_select_filtro_principal, null);
@@ -234,6 +269,8 @@ public class FragmentoListadoMaterias extends Fragment implements Contratos.
                 if(tipoFiltro.equals("Facultades"))
                 {
                     cargarRecyclerViewFilter(valueFiltroSpinner);
+                    editor.putString("valorFacultad",valueFiltroSpinner);
+                    editor.apply();
                 }
                 if(tipoFiltro.equals("Docentes"))
                 {
@@ -311,5 +348,22 @@ public class FragmentoListadoMaterias extends Fragment implements Contratos.
         objAdaptador =null;
         options = null;
     }//Fin del metodo onDestroy
+
+    @Override
+    public void onItemClick(int posicion)
+    {
+        Fragment fragment = new FragmentoMapaDetail();
+        Bundle bundle = new Bundle();
+        bundle.putString("idMateria",objAdaptador.getIdMateria());
+        bundle.putString("facultad",valuePreference);
+        fragment.setArguments(bundle);
+        btnFiltro.setVisibility(View.INVISIBLE);
+        textViewTituloFacultad.setText("");
+        textViewTituloFacultad.setVisibility(View.INVISIBLE);
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction().setTransition
+                (FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.replace(R.id.layout_listado_materias,fragment).commit();
+    }//Fin del metodo onItemClick
 
 }//Fin de la clase FragmentoListadoMaterias
