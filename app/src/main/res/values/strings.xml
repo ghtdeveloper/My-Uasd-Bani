@@ -88,4 +88,12 @@
     <string name="textBtnAplicar">Aplicar</string>
     <!--Mapa busqueda Lugares-->
     <string name="textHintLugarBusqueda">Seleccione el lugar o ubicacion</string>
+    <string name="textLocalidadUASDBANI">UASD BANI</string>
+    <string name="textLocalidadEdificiojulieta">Edificio julieta</string>
+    <string name="textLocalidadEdificioCarlosserret">Edificio Carlos Serret</string>
+    <string name="textLocalidadEscuelaCabral">Escuela Aquiles Cabral</string>
+    <string name="textLocalidadLiceoBillini">Liceo Francisco Gregorio Billini</string>
+    <!--Mapas estilo-->
+    <string name="textEstiloNormal">Mapa</string>
+    <string name="textEstiloSatelite">Satélite</string>
 </resources>

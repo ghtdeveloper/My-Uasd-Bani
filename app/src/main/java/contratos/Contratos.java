@@ -51,6 +51,11 @@ public interface Contratos
         void init();
     }//Fin de la interfaz VistaFragmentoMapa
 
+    interface VistaFragmentoPanoramico
+    {
+        void init(View view);
+    }//Fin de la interfaz VistaFragmentoPanoramico
+
     interface  VistaFragmentoMapaDetail
     {
         void init(View view);

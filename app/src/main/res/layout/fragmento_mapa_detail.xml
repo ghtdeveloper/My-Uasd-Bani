@@ -5,6 +5,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <ImageButton
+        android:id="@+id/btnZoomInListMateria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/textContentImage"
+        android:elevation="15dp"
+        android:src="@drawable/ic_baseline_add_32"
+        app:layout_constraintBottom_toTopOf="@+id/btnZoomOutListMaria"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnZoomOutListMaria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="@string/textContentImage"
+        android:elevation="15dp"
+        android:src="@drawable/ic_baseline_horizontal_rule_32"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <Button
+        android:id="@+id/btnMapaStyleNormalListMat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:elevation="15dp"
+        android:text="@string/textEstiloNormal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMapaMateriaGeo" />
+
+    <Button
+        android:id="@+id/btnMapaStyleSatelitelListMat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:elevation="15dp"
+        android:text="@string/textEstiloSatelite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMapaStyleNormalListMat" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMapaMateriaGeo"
         android:layout_width="match_parent"

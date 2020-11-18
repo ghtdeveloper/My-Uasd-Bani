@@ -1,37 +1,118 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_fragment_vista_mapa_principal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="vistas.login.menu_principal.ui.mapa_uasd_bani.FragmentMapa">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
+    <ImageButton
+        android:id="@+id/btnZoomIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/textContentImage"
+        android:elevation="15dp"
+        android:src="@drawable/ic_baseline_add_32"
+        app:layout_constraintBottom_toTopOf="@+id/btnZoomOut"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnZoomOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="@string/textContentImage"
+        android:elevation="15dp"
+        android:src="@drawable/ic_baseline_horizontal_rule_32"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <Button
+        android:id="@+id/btnMapaStyleNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
+        android:elevation="15dp"
+        android:text="@string/textEstiloNormal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMapa" />
+
+
+    <Button
+        android:id="@+id/btnMapaStyleSatelite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:elevation="15dp"
+        android:text="@string/textEstiloSatelite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMapaStyleNormal" />
+
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarMapa">
 
-        <TextView
-            android:id="@+id/textView6"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/textHintLugarBusqueda"
-            android:textColor="@color/primary_text"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinnerLugares"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginTop="35dp"
-            android:background="@drawable/style_spinner_bg"
-            android:foregroundGravity="center"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </RelativeLayout>
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/btnUasdBani"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textLocalidadUASDBANI"
+                    android:textSize="24sp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/btnEscuelaCabral"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textLocalidadEscuelaCabral"
+                    android:textSize="24sp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/btnEdificioJulieta"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textLocalidadEdificiojulieta"
+                    android:textSize="24sp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/btnEdificioCarlosSerret"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textLocalidadEdificioCarlosserret"
+                    android:textSize="24sp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/btnEdificioLiceoGregorioBillini"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textLocalidadLiceoBillini"
+                    android:textSize="24sp" />
+            </com.google.android.material.chip.ChipGroup>
+        </RelativeLayout>
+    </HorizontalScrollView>
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMapa"
@@ -68,15 +149,14 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mapLocalidad"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMapa"
         tools:context="adaptadores.detail_map.FragmentoMapaDetail" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

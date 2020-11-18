@@ -22,4 +22,8 @@
     -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyAv04pyBeSBebhaDeulfz_F7fCNMvkgDdQ</string>
+
+    <string name="Street_View_API" templateMergeStrategy="preserve" translatable="false">
+        AIzaSyDskcka6ev3e1iW9hIJTbWrXHOki2PjF-k</string>
+
 </resources>

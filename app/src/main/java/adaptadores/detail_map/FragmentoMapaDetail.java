@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.ghtdeveloper.my_uasd_bani.R;
@@ -22,6 +24,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,12 +44,14 @@ public class FragmentoMapaDetail extends Fragment implements Contratos.VistaFrag
     //Objetos
     private Bundle bundle;
     private Presentador objPresentador;
+    private GoogleMap map;
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback()
     {
         @Override
         public void onMapReady(final GoogleMap googleMap)
         {
+            map = googleMap;
             objPresentador.datosCoordenadasMateria(getFacultad(), getIdMateria()).get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -102,11 +107,14 @@ public class FragmentoMapaDetail extends Fragment implements Contratos.VistaFrag
         //Vista
         Toolbar toolbarDetailFragment = view.findViewById(R.id.toolbarMapaMateriaGeo);
         fragMap = view.findViewById(R.id.map);
+        ImageButton btnZoomOut = view.findViewById(R.id.btnZoomOutListMaria);
+        ImageButton btnZoomIn = view.findViewById(R.id.btnZoomInListMateria);
+        Button btnEstiloMapa = view.findViewById(R.id.btnMapaStyleNormalListMat);
+        Button btnEstiloSatelite = view.findViewById(R.id.btnMapaStyleSatelitelListMat);
         //Configuracion Toolbar
         ((AppCompatActivity) requireActivity())
                 .setSupportActionBar(toolbarDetailFragment);
         //Texto Toolbar
-
         Objects.requireNonNull(((AppCompatActivity) requireActivity())
                 .getSupportActionBar()).setTitle("Detalle Ubicación");
         //Icono Toolbar
@@ -123,6 +131,30 @@ public class FragmentoMapaDetail extends Fragment implements Contratos.VistaFrag
             @Override
             public void onClick(View v) {
                 mostrarFragmentoAnterior();
+            }
+        });
+        btnZoomOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                map.animateCamera(CameraUpdateFactory.zoomOut());
+            }
+        });
+        btnZoomIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                map.animateCamera(CameraUpdateFactory.zoomIn());
+            }
+        });
+        btnEstiloMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            }
+        });
+        btnEstiloSatelite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
             }
         });
     }//Fin del metodo init
