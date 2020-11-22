@@ -41,6 +41,10 @@ public class FragmentoMapaDetail extends Fragment implements Contratos.VistaFrag
 {
     //Vista
     private FragmentContainerView fragMap;
+    private ImageButton btnZoomOut;
+    private ImageButton btnZoomIn;
+    private Button btnEstiloMapa;
+    private  Button btnEstiloSatelite;
     //Objetos
     private Bundle bundle;
     private Presentador objPresentador;
@@ -107,10 +111,10 @@ public class FragmentoMapaDetail extends Fragment implements Contratos.VistaFrag
         //Vista
         Toolbar toolbarDetailFragment = view.findViewById(R.id.toolbarMapaMateriaGeo);
         fragMap = view.findViewById(R.id.map);
-        ImageButton btnZoomOut = view.findViewById(R.id.btnZoomOutListMaria);
-        ImageButton btnZoomIn = view.findViewById(R.id.btnZoomInListMateria);
-        Button btnEstiloMapa = view.findViewById(R.id.btnMapaStyleNormalListMat);
-        Button btnEstiloSatelite = view.findViewById(R.id.btnMapaStyleSatelitelListMat);
+        btnZoomOut = view.findViewById(R.id.btnZoomOutListMaria);
+        btnZoomIn = view.findViewById(R.id.btnZoomInListMateria);
+        btnEstiloMapa = view.findViewById(R.id.btnMapaStyleNormalListMat);
+        btnEstiloSatelite = view.findViewById(R.id.btnMapaStyleSatelitelListMat);
         //Configuracion Toolbar
         ((AppCompatActivity) requireActivity())
                 .setSupportActionBar(toolbarDetailFragment);
@@ -168,6 +172,10 @@ public class FragmentoMapaDetail extends Fragment implements Contratos.VistaFrag
         transaction.replace(R.id.layout_fragmento_mapa_detail,new FragmentoListadoMaterias()).
                 commit();
         fragMap.setVisibility(View.INVISIBLE);
+        btnZoomOut.setVisibility(View.INVISIBLE);
+        btnEstiloMapa.setVisibility(View.INVISIBLE);
+        btnEstiloSatelite.setVisibility(View.INVISIBLE);
+        btnZoomIn.setVisibility(View.INVISIBLE);
     }//Fin del metodo mostrarFragmentoAnterior
 
     @Override

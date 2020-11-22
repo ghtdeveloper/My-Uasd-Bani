@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.Fade;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -13,19 +14,44 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.ghtdeveloper.my_uasd_bani.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.protobuf.Api;
+
 import java.util.Objects;
 import contratos.Contratos;
 import herramientas.Transiciones;
 import presentador.Presentador;
+import vistas.login.menu_principal.NavMenuPrincipal;
 import vistas.registro.ActividadRegistroUsuario;
 
 public class ActividadInicioSesion extends AppCompatActivity implements Transiciones,
         Contratos.VistaActividadInicioSesion
 {
+    //Variables
+    private static final int RC_SIGN_IN =1 ;
+    public  static int TYPE_ACCESS = 0;
     //Vistas
     private TextInputLayout textInputLayoutCorreo;
     private TextInputLayout textInputLayoutClave;
@@ -34,6 +60,10 @@ public class ActividadInicioSesion extends AppCompatActivity implements Transici
     //Objetos
     private Presentador objPresentador;
     private AlertDialog dialog;
+    private FirebaseAuth mAuth;
+    //Objetos Google
+    private  GoogleSignInClient googleSignInClient;
+    private  Intent intInicioSessionGoogle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,8 +78,26 @@ public class ActividadInicioSesion extends AppCompatActivity implements Transici
         //Se inicializan los objetos
         objPresentador = new Presentador(ActividadInicioSesion.this);
         init();
-
     }//Fin del metodo onCreate
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+       FirebaseUser currenteUser = mAuth.getCurrentUser();
+       if(currenteUser != null)
+       {
+           //Si no es nulo quiere decir que hay un usuario ya logeado por la auth de google
+           TYPE_ACCESS =2 ;//Acceso via Google
+           intInicioSessionGoogle = new Intent(getApplicationContext(),NavMenuPrincipal.class);
+           intInicioSessionGoogle.putExtra("nombreCompletoUsuarioGoogle",currenteUser.
+                   getDisplayName());
+           intInicioSessionGoogle.putExtra("correoUsuarioGoogle",currenteUser.
+                   getEmail());
+           startActivity(intInicioSessionGoogle);
+           Toast.makeText(getApplicationContext(),"Bienvenido nuevamente "+ currenteUser.
+                   getDisplayName(),Toast.LENGTH_LONG).show();
+       }//Fin del if
+    }//Fin del metodo onStart
 
     @Override
     public void transicionInputMenuPrincipal()
@@ -76,6 +124,7 @@ public class ActividadInicioSesion extends AppCompatActivity implements Transici
         textInputLayoutClave = findViewById(R.id.textInputLayoutClaveUsuario);
         txtClave = findViewById(R.id.txtClaveUsuario);
         txtCorreo = findViewById(R.id.txtCorreoUsuario);
+        SignInButton butttonAceesGoogle = findViewById(R.id.sign_in_button);
 
         //Listeners
         textViewRegistroUsuario.setOnClickListener(new View.OnClickListener() {
@@ -87,16 +136,34 @@ public class ActividadInicioSesion extends AppCompatActivity implements Transici
         });
 
         Button btnAcceder = findViewById(R.id.btnAcceder);
-      /* btnAcceder.setOnClickListener(new View.OnClickListener() {
+        btnAcceder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
               autenticarUsuario();
+              TYPE_ACCESS = 1;//Acceso normal
             }
-        });*/
+        });
 
+        /*
+            Se configura el accso por el API GOOGLE
+         */
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.
+                DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.textOauthID))
+                .requestEmail().build();
+        googleSignInClient = GoogleSignIn.getClient(this,gso);
 
-       mostrarRunProcees();
+        butttonAceesGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signInGoogle();
+            }
+        });
+
+        mAuth = FirebaseAuth.getInstance();
+
+       //mostrarRunProcees();
     }//Fin del metodo init
 
     @Override
@@ -154,13 +221,13 @@ public class ActividadInicioSesion extends AppCompatActivity implements Transici
             {
                 try {
                     Thread.sleep(1700);
-                   /* objPresentador.autenticarUsuario(Objects.requireNonNull(txtCorreo.
+                   objPresentador.autenticarUsuario(Objects.requireNonNull(txtCorreo.
                                     getText()).toString(),
-                            Objects.requireNonNull(txtClave.getText()).toString());*/
+                            Objects.requireNonNull(txtClave.getText()).toString());
 
-                    //Acceso automatico
+                    /*Acceso automatico
                     objPresentador.autenticarUsuario("martinezfriasedison@gmail.com",
-                            "popy29");
+                            "popy29");*/
 
                     dialog.dismiss();
                 } catch (InterruptedException e) {
@@ -174,6 +241,77 @@ public class ActividadInicioSesion extends AppCompatActivity implements Transici
 
     }//Fin del metodo mostrarRunProcees
 
+    @Override
+    public void signInGoogle()
+    {
+        Intent signGoogle = googleSignInClient.getSignInIntent();
+        startActivityForResult(signGoogle,RC_SIGN_IN);
+    }//Fin del metodo signInGoogle
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RC_SIGN_IN)
+        {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount cuenta = task.getResult(ApiException.class);
+                assert cuenta != null;
+                //Log.w("DATA", Objects.requireNonNull(cuenta.getDisplayName()));
+                firebaseAuthGoogle(Objects.requireNonNull(cuenta).getIdToken());
+            } catch (ApiException e) {
+               Log.w("Error",ApiException.class.toString());
+            }
+        }//Fin del if
+
+    }//FIn del metodo onActivityResult
+
+    @Override
+    public void firebaseAuthGoogle(String idToken)
+    {
+        AuthCredential credenciales = GoogleAuthProvider.getCredential(idToken,null);
+        mAuth.signInWithCredential(credenciales).addOnCompleteListener
+                (new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task)
+            {
+                if(task.isSuccessful())
+                {
+                    Log.w("Acceso Google Firebase","El acceso con firebaseAuth esta" +
+                            " completo");
+                    Toast.makeText(getApplicationContext(),"Bienvenido",Toast.LENGTH_LONG)
+                            .show();
+                    FirebaseUser user = mAuth.getCurrentUser();
+
+                    assert user != null;
+                    //Log.w("INFO OBTENIDA", Objects.requireNonNull(user.getEmail()));
+                    /*
+                        Se actualizo el UI y se envia los datos a la actividad principal
+                     */
+                    actualizarUI(user);
+                }else
+                {
+                    Log.e("Error al autenticar","Error al iniciar proceso" +
+                            "de autenticacion"+ task.getException());
+                    Toast.makeText(getApplicationContext(),"Error al autenticar"
+                    ,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }//Fin del metodo firebaseAuthGoogle
+
+    @Override
+    public void actualizarUI(FirebaseUser usuario)
+    {
+        TYPE_ACCESS =2 ;//Acceso via Google
+        intInicioSessionGoogle = new Intent(getApplicationContext(),NavMenuPrincipal.class);
+        intInicioSessionGoogle.putExtra("nombreCompletoUsuarioGoogle",usuario.getDisplayName());
+        intInicioSessionGoogle.putExtra("correoUsuarioGoogle",usuario.getEmail());
+        startActivity(intInicioSessionGoogle);
+    }//Fin del metodo actualizarUI
 
     @Override
     protected void onDestroy() {

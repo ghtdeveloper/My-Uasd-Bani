@@ -24,12 +24,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+
 import com.ghtdeveloper.my_uasd_bani.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,6 +41,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -45,10 +51,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Objects;
+
 import contratos.Contratos;
 import presentador.Presentador;
 import vistas.login.ActividadInicioSesion;
@@ -58,18 +66,22 @@ import vistas.login.menu_principal.NavMenuPrincipal;
 public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragmentoMiPerfil,
         PopupMenu.OnMenuItemClickListener
 {
-
     //Vista
     private View root;
     private TextInputEditText txtNombreUsuario;
     private TextInputEditText txtApellidoUsuario;
     private TextInputEditText txtCorreoUsuario;
+    private TextInputLayout textInputLayoutApellido;
+    private TextInputLayout textInputLayoutNombre;
+    private TextInputLayout textInputLayoutCorreo;
     private Spinner spinnerFacultad;
     private Spinner spinnerCarrera;
     private ImageButton btnEditarFotoPerfil;
     private Button btnEditarCampos;
     private Button btnActualizarCampos;
     private ImageView imageViewFotoPerfil;
+    private TextView textViewTituloFacultad;
+    private TextView textViewTituloCarrera;
     //Variables
     private String facultadObtenida;
     private String carreraObtenida;
@@ -82,8 +94,8 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
     private Uri uriImageProfile;
     private Intent intent;
     private AlertDialog dialog;
-
-
+    //Auth Google
+    private FirebaseUser user;
 
     //Constructor de la clase
     public FragmentoMiPerfil() { }
@@ -98,6 +110,9 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
         root = inflater.inflate(R.layout.fragmento_mi_perfil, container, false);
         //Se inicializan los objetos
         objPresentador = new Presentador(getContext());
+        //Se verifica si hay algun usuario autenticado por Firebase AuthGoogle
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
         init();
         return  root;
     }//Fin del metodo onCreateView
@@ -116,6 +131,11 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
         btnEditarFotoPerfil = root.findViewById(R.id.btnEditarImagen);
         imageViewFotoPerfil = root.findViewById(R.id.imageViewUsuarioProfile);
         Toolbar toolbarMiPerfil = root.findViewById(R.id.toolbarMiPerfil);
+        textViewTituloFacultad = root.findViewById(R.id.textView3);
+        textViewTituloCarrera = root.findViewById(R.id.textViewTituloCarrera);
+        textInputLayoutApellido = root.findViewById(R.id.textInputLayoutPrimerApellido);
+        textInputLayoutCorreo = root.findViewById(R.id.textInputLayoutCorreo);
+        textInputLayoutNombre = root.findViewById(R.id.textInputLayoutPrimerNombre);
         //Configuracion Toolbar
         ((AppCompatActivity) requireActivity())
                 .setSupportActionBar(toolbarMiPerfil);
@@ -131,10 +151,16 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
         Objects.requireNonNull(((AppCompatActivity)
                 requireActivity()).getSupportActionBar())
                 .setDisplayHomeAsUpEnabled(true);
-
-        //Se carga la data
-        obtenerDataFirebase();
-
+        if(user != null)
+        {//Hay un usuario de google autenticado
+            Log.w("USUARIO GOOGLE","Usuario google conectado");
+           mostrarDatosUsuarioGoogle();
+        } if(user == null)
+        {
+            //No hay un usuario autenticado de google
+            Log.w("Usuario normal","Tenemos un usuario normal");
+            obtenerDataFirebase();
+        }
         //Listeners
         btnEditarCampos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,8 +180,6 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
                 showMenuPopUp();
             }
         });
-
-
     }//Fin del metodo init
 
 
@@ -273,7 +297,8 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
                             FirebaseFirestoreException error)
                     {
                         assert queryDocumentSnapshots != null;
-                        for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments())
+                        for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots.
+                                getDocuments())
                         {
                             String idDocumentos = documentSnapshot.getId();
                             listCarreras.add(idDocumentos);
@@ -504,5 +529,29 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
         dialog.show();
 
     }//Fin del metodo mostrarProgressBar
+
+    @Override
+    public void mostrarDatosUsuarioGoogle()
+    {
+        //Lo primero es ocultar las vista que no necesitas
+        btnEditarCampos.setVisibility(View.INVISIBLE);
+        textViewTituloFacultad.setVisibility(View.INVISIBLE);
+        textViewTituloCarrera.setVisibility(View.INVISIBLE);
+        spinnerFacultad.setVisibility(View.INVISIBLE);
+        spinnerCarrera.setVisibility(View.INVISIBLE);
+        textInputLayoutCorreo.setVisibility(View.INVISIBLE);
+        //Modificamos los TextInputEditText (Hint)
+        textInputLayoutNombre.setHint("Nombre Completo");
+        textInputLayoutNombre.setFocusable(false);
+        textInputLayoutApellido.setFocusable(false);
+        textInputLayoutApellido.setHint("Correo");
+        //Agregamos los datos correspondientes
+        txtNombreUsuario.setText(user.getDisplayName());
+        //Log.w("DATA NOMBRE GOOGLE", Objects.requireNonNull(user.getDisplayName()));
+        txtApellidoUsuario.setText(user.getEmail());
+        //Agregamos el URI a  la imagen de perfil
+        uriImageProfile = user.getPhotoUrl();
+        Picasso.with(getContext()).load(uriImageProfile).into(imageViewFotoPerfil);
+    }//Fin del metodo mostrarDatosUsuarioGoogle
 
 }//Fin de la class FragmentoMiPerfil

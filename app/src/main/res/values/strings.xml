@@ -96,4 +96,6 @@
     <!--Mapas estilo-->
     <string name="textEstiloNormal">Mapa</string>
     <string name="textEstiloSatelite">Satélite</string>
+    <!-- ID CLIENTE OUTH 2.0-->
+    <string name="textOauthID">405743454899-a74a857ci4e9jcmeesnsr4u7tq08fj7o.apps.googleusercontent.com</string>
 </resources>

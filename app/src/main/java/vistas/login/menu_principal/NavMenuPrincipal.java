@@ -1,5 +1,6 @@
 package vistas.login.menu_principal;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,12 +21,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import com.bumptech.glide.Glide;
 import com.ghtdeveloper.my_uasd_bani.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
-
 import vistas.login.ActividadInicioSesion;
 
 public class NavMenuPrincipal extends AppCompatActivity {
@@ -41,7 +41,7 @@ public class NavMenuPrincipal extends AppCompatActivity {
     //objetos
     private Intent intentMenuPrincipal;
     private Uri uriPictUsuario;
-
+    private GoogleSignInAccount account;
     //Variables
     public static String idUsuario;
     public static String facultadUsuario;
@@ -53,7 +53,6 @@ public class NavMenuPrincipal extends AppCompatActivity {
 
         /*Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
-
 
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -80,8 +79,8 @@ public class NavMenuPrincipal extends AppCompatActivity {
                 R.id.nav_cerrar_sesion,R.id.nav_mi_perfil)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-     //   NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavController navController = Navigation.findNavController(this,
+                R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navigationView, navController);
         //Datos Usuario Conectado
         textViewNombreCompletoUsuario = hView.findViewById(R.id.textNombreCompletoUsuario);
@@ -89,11 +88,12 @@ public class NavMenuPrincipal extends AppCompatActivity {
         textViewOtrosDatos = hView.findViewById(R.id.textOtrosDatosUsuario);
         imageViewFotoUsuario = hView.findViewById(R.id.imageViewPictUsuario);
 
-        //Se cargan las informaciones correspondientes
-        cargarDatosUsuarioConectado();
+        account = GoogleSignIn.getLastSignedInAccount(this);
 
+        //Se especifica el metodo de acceso
+        definirMetodoAcceso();
         //Se asigna la imagen al perfil del usuario
-        Picasso.with(getApplicationContext()).load(uriPictUsuario).into(imageViewFotoUsuario);
+       Picasso.with(getApplicationContext()).load(uriPictUsuario).into(imageViewFotoUsuario);
 
         // Cerrar sesion
         navMenu.findItem(R.id.nav_cerrar_sesion).
@@ -108,21 +108,63 @@ public class NavMenuPrincipal extends AppCompatActivity {
         });
     }//Fin del metodo onCreate
 
+    private void definirMetodoAcceso()
+    {
+        /*
+            Se debe verificar que metodo de acceso esta utilizando el usuario
+            para la toma de decisiones
+         */
+        if(ActividadInicioSesion.TYPE_ACCESS == 1)
+        {
+            cargarDatosAccesoUsuarioNormal();
+        }
+        if(ActividadInicioSesion.TYPE_ACCESS == 2)
+        {
+            cargarDatosAccesoUsuarioApiGoogle();
+        }
+    }//Fin del metodo definirMetodoAcceso
+
+
+
     /*
         Se define el metodo para cargar los datos
-        del usuario conectado.
+        del usuario conectado via el metodo normal de acceso.
      */
-    private void cargarDatosUsuarioConectado()
+    private void cargarDatosAccesoUsuarioNormal()
     {
-       intentMenuPrincipal = getIntent();
-       textViewNombreCompletoUsuario.setText(intentMenuPrincipal.getStringExtra
+        intentMenuPrincipal = getIntent();
+        textViewNombreCompletoUsuario.setText(intentMenuPrincipal.getStringExtra
                ("nombreCompleto"));
-       textViewCorreoUsuario.setText(intentMenuPrincipal.getStringExtra("correoUsuario"));
-       textViewOtrosDatos.setText(intentMenuPrincipal.getStringExtra("otrosDatos"));
-       idUsuario = intentMenuPrincipal.getStringExtra("idUsuario");
+        textViewCorreoUsuario.setText(intentMenuPrincipal.getStringExtra("correoUsuario"));
+        textViewOtrosDatos.setText(intentMenuPrincipal.getStringExtra("otrosDatos"));
+        idUsuario = intentMenuPrincipal.getStringExtra("idUsuario");
         uriPictUsuario =Uri.parse(intentMenuPrincipal.getStringExtra("urlPict"));
         facultadUsuario = intentMenuPrincipal.getStringExtra("facultadUsuario");
     }//Fin del metodo cargarDatosUsuarioConectado
+
+
+    /*
+      Se define el metodo para cargar los datos
+      del usuario conectado via el metodo google.
+   */
+    @SuppressLint("SetTextI18n")
+    private void cargarDatosAccesoUsuarioApiGoogle()
+    {
+        intentMenuPrincipal = getIntent();
+        textViewNombreCompletoUsuario.setText(intentMenuPrincipal.getStringExtra
+                ("nombreCompletoUsuarioGoogle"));
+        textViewCorreoUsuario.setText(intentMenuPrincipal.
+                getStringExtra("correoUsuarioGoogle"));
+        textViewOtrosDatos.setText("Acceso Google");
+        //Se asigna la imagen de perfil
+        uriPictUsuario = null;
+        if(account!= null)
+        {
+            uriPictUsuario = account.getPhotoUrl();
+            Picasso.with(getApplicationContext()).load(uriPictUsuario).into(imageViewFotoUsuario);
+        }
+    }//Fin del metodo cargarDatosUsuarioConectado
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -149,8 +191,14 @@ public class NavMenuPrincipal extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which)
             {
                 //Al hacer click en Cerrar sesion desconecto el usuario de la app
-               mostrarPantallaLogin();
-            }
+
+                if(account != null)
+                {
+                   FirebaseAuth.getInstance().signOut();
+                }
+                mostrarPantallaLogin();
+
+            }//Fin del metodo onClick
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
@@ -163,15 +211,20 @@ public class NavMenuPrincipal extends AppCompatActivity {
         dialog.show();
     }//Fin del metodo cerrarSesion
 
-/*
-    Metodo para mostrar el login
- */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseAuth.getInstance().signOut();
+    }
+
+    /*
+        Metodo para mostrar el login
+     */
     private void mostrarPantallaLogin()
     {
         intentMenuPrincipal = new Intent(getApplicationContext(), ActividadInicioSesion.class);
         startActivity(intentMenuPrincipal, ActivityOptions
                 .makeSceneTransitionAnimation(this).toBundle());
     }//Fin del metodo mostrarPantallaLogin
-
 
 }//Fin de la class NavMenu
