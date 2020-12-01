@@ -171,11 +171,6 @@ public class Presentador extends View implements Contratos.Presentador
         return objActualizar.actualizarDatos(idDocumento);
     }//Fin del metodo actualizarDatos
 
-    @Override
-    public void subirImagenesUsuarios(Uri uriPict)
-    {
-        objSubirImagenes.subirImagenesPictUsuarios( uriPict);
-    }///Fin del metodo subirImagenesUsuarios
 
     @Override
     public StorageReference refenceImagenUsuario(String idUsaurio,String nombreArchivo) {

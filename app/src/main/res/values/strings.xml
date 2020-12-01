@@ -57,15 +57,53 @@
     <string name="menuTomarFoto">Cámara</string>
     <string name="menuGaleria">Galería </string>
     <!--Informacion-->
-    <string name="textInfoNoticiasUASD">Noticias UASD</string>
+    <string name="textInfoNoticiasUASD">Información centro</string>
     <string name="textInfoEstudianteUASD">Información estudiantes</string>
     <string name="textSeleccNoticia">Seleccione el tipo de noticias que le interesa visualizar
     </string>
-    <string name="textInfoTextUasd1">FACULTAD DE ARTES ASUPICIA CONGRESO INTERNACIONAL
-    DE ARTES VISUALES</string>
-    <string name="textInfoTextUasd2">FACULTAD DE ARTES CELEBRA SUS 20 AÑOS DE FUNDACION</string>
-    <string name="textInfoTextUasd3">AUTORIDADES FCS JURAMENTAN NUEVA DIRECTORA ESCUELA
-    DE BIOANÁLISIS-UASD</string>
+  <string name="textInfoContacto">
+CONTACTOS
+Calle Uladislao Guerrero No. 2 Esquina C/ Duarte (Antiguo Café Vaganiona), Bani.
+Teléfonos: 809 522-5174
+                  809 380-0132
+email: curban@uasd.edu.do
+Laboramos de 8:00 a.m. a 7:00 p.m.
+  </string>
+    <string name="textInfoParrajoInfo1">
+        La UASD Centro Baní, uno de los Benjamines, fue fundado el 19 de Febrero del 2008, con el
+        esfuerzode hombres y mujeres, visionarios, convencidos de la necesidad de crear una unidad
+        académica que le permitiera a la juventud de la región Valdesia realizar diferentes carreras
+        Universitarias.Las labores administrativas de la UASD Centro Baní iniciaron el 01 de
+        Junio del 2010 en la oficinade la casa no. 02 de la Calle Uladislao Guerrero.
+        La docencia, a su vez inicio el 27 de septiembre del mismo año, en rectoría
+        del Dr. Franklin García Fermín.La UASD Centro Baní, da acogida a jóvenes de
+        diferentes extractos sociales, cubriendo
+        la población estudiantil de las zonas rurales, barrios, pueblos y municipios
+        de tres provincias periféricas ( Peravia, San José de Ocoa y Azua), logrando
+        de esta manera que todos aquellos jóvenes que no tienen la oportunidad de
+        trasladarse a cursar sus estudios a la Sede en Santo Domingo y conociendo
+        la trascendencia académica de nuestra Universidad deciden formarse como
+        profesionales y dar lo mejor de sí mismos en beneficio del desarrollo de la sociedad
+        Dominicana.Desde el surgimiento de la UASD Baní, ha venido realizando grandes
+        transformaciones,las cuales le han permitido una evolución y desarrollo constante.
+        Realiza funcionesde docencia, investigación y extensión.
+
+        La UASD Centro Baní, aporta soluciones sociales pertinentes, insertando a los estudiantes al
+        mercado productivo laboral, aumentando la población económicamente activa,
+        disminuyendo el analfabetismo, la mortalidad infantil y maternal, siendo
+        testigo de la evolución y crecimiento de la provincia Peravia, creando las
+        bases para el desarrollo sostenible de la Región Valdesia con la participación
+        e integración de la comunidad.
+    </string>
+
+    <string name="textInfoParrajoInfo2">
+        FEDERACIÓN DE ESTUDIANTES DOMINICANOS UASD-BANÍ
+
+        Este grupo estudiantil, fue creado con el fin de mantenernos informados de las
+        actividades uasdianas, mantener unidos a tod@s en un mismo lugar donde puedan informarse,
+        Responder, Preguntar, compartir, opinar, Etc.
+    </string>
+
     <!--Listado de materias y horarios-->
     <string name="textTituloMateria">Materia:</string>
     <string name="textValueMateria">"@materia"</string>

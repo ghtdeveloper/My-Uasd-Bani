@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import vistas.login.menu_principal.ui.informacion.InfoUasd.FragmentoInfoUasd1;
 import vistas.login.menu_principal.ui.informacion.InfoUasd.FragmentoInfoUasd2;
-import vistas.login.menu_principal.ui.informacion.InfoUasd.FragmentoInfoUasd3;
 
 /**
  * Creado por Edison Martinez on 08,Sunday,2020
@@ -33,8 +32,6 @@ public class AdaptadorColeccionPagInfoUASD extends FragmentStatePagerAdapter
             case 1:
                 return  new FragmentoInfoUasd2();
 
-            case 2:
-                return  new FragmentoInfoUasd3();
         }
         return new FragmentoInfoUasd1();
     }//Fin del metodo getItem
@@ -42,7 +39,7 @@ public class AdaptadorColeccionPagInfoUASD extends FragmentStatePagerAdapter
     @Override
     public int getCount()
     {
-        return 3;
+        return 2;
     }//Fin del metodo getCount
 
     @Nullable

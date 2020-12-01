@@ -1,18 +1,13 @@
 package contratos;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
-
 import com.ghtdeveloper.my_uasd_bani.modelo.Usuarios;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.StorageReference;
-
 import java.util.Date;
 
 /**
@@ -56,11 +51,6 @@ public interface Contratos
     {
         void init();
     }//Fin de la interfaz VistaFragmentoMapa
-
-    interface VistaFragmentoPanoramico
-    {
-        void init(View view);
-    }//Fin de la interfaz VistaFragmentoPanoramico
 
     interface  VistaFragmentoMapaDetail
     {
@@ -108,7 +98,7 @@ public interface Contratos
         CollectionReference obtenerListadoCarreras(String facultad);
         Query obtenerDatosUsuario(String idUsuario);
         DocumentReference actualizarDatos(String idDocumento);
-        void subirImagenesUsuarios( Uri uriPict);
+        //void subirImagenesUsuarios( Uri uriPict);
         StorageReference refenceImagenUsuario(String idUsaurio,String nombreArchivo);
         Query obtenerListadoMaterias(String facultad);
         Query obtenerListadoMateriasxDocente(String facultad, String docente);
