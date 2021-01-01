@@ -44,7 +44,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="vistas.registro.ActividadRegistroUsuario"
-            android:theme="@style/Theme.Design.NoActionBar" />
+            android:theme="@style/materialDesignbyLogin" />
         <activity
             android:name="vistas.login.ActividadInicioSesion"
             android:theme="@style/materialDesignbyLogin">

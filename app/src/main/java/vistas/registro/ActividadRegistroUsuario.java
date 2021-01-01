@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -109,7 +111,7 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
     {
         //Cast a las vistas
         //Vistas
-        ImageButton btnGuardarUsuario = findViewById(R.id.btnGuardarUsuario);
+        Button btnGuardarUsuario = findViewById(R.id.btnGuardarUsuario);
         txtPrimerNombre = findViewById(R.id.txtPrimerNombre);
         txtPrimerApellido = findViewById(R.id.txtPrimerApellido);
         txtCorreo = findViewById(R.id.txtCorreo);
@@ -125,6 +127,7 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
         //Configuracion Toolbar
         Toolbar toolbar = findViewById(R.id.toolbarReg);
         toolbar.setTitle(R.string.textToolbarRegistroUsuario);
+        toolbar.setSubtitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
 
         //Spinner

@@ -8,7 +8,8 @@
     <string name="textClave">Contraseña</string>
     <string name="textAcceder">Acceder</string>
     <string name="textNoRegistrado">¿No estas Registrado?  Registraste</string>
-    <string name="textTambienPuedesAcceder">Tambien Puedes Acceder con:</string>
+    <string name="textTambienPuedesAcceder">OR</string>
+    <string name="textResetClave">¿Se te olvidó tu contraseña?</string>
     <!--Pantalla Registro usuario-->
     <string name="textToolbarRegistroUsuario">Registro</string>
     <string name="textRegistroTitulo">Bienvenido</string>
@@ -16,6 +17,7 @@
     <string name="hintTextPrimerApellido">Apellido</string>
     <string name="hintTextCorreo">Correo</string>
     <string name="hintTextFacultad">Facultad</string>
+    <string name="textGoogle">Continuar con Google</string>
     <string name="textEditar">Editar</string>
     <string name="textActualizar">Actualizar</string>
     <string name="hintTextCarrera">Carrera</string>
@@ -31,7 +33,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <!--Nav Menu-->
-    <string name="menu_listado_materias_horarios">Listado de materias y horarios</string>
+    <string name="menu_listado_materias_horarios">Materias y horarios</string>
     <string name="menu_informacion">Información</string>
     <string name="menu_mapa">Mapa UASD-BANI</string>
     <string name="menu_cerrar_sesion">Cerrar sesión</string>
@@ -103,6 +105,7 @@ Laboramos de 8:00 a.m. a 7:00 p.m.
         actividades uasdianas, mantener unidos a tod@s en un mismo lugar donde puedan informarse,
         Responder, Preguntar, compartir, opinar, Etc.
     </string>
+    <string name="textGuardar"> Guardar</string>
 
     <!--Listado de materias y horarios-->
     <string name="textTituloMateria">Materia:</string>
@@ -136,4 +139,10 @@ Laboramos de 8:00 a.m. a 7:00 p.m.
     <string name="textEstiloSatelite">Satélite</string>
     <!-- ID CLIENTE OUTH 2.0-->
     <string name="textOauthID">405743454899-a74a857ci4e9jcmeesnsr4u7tq08fj7o.apps.googleusercontent.com</string>
+    <string name="textTituloResetClave">Olvidaste tu contraseña?</string>
+    <string name="textSubtituloResetClave">solo necesitamos su ID de correo electrónico registrado para
+        enviarle instrucciones para restablecer la contraseña.</string>
+    <string name="textResetClaveBtn">REINICIAR CONTRASEÑA</string>
+    <string name="textAtras">Atrás</string>
+
 </resources>

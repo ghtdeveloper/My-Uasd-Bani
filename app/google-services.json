@@ -8,35 +8,31 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:405743454899:android:e12fc9e90398a0c2727ec6",
+        "mobilesdk_app_id": "1:405743454899:android:29ac0f024c408b7a727ec6",
         "android_client_info": {
           "package_name": "com.ghtdeveloper.my_uasd_bani"
         }
       },
       "oauth_client": [
         {
-          "client_id": "405743454899-umn32vimio338tre5l5b0702c05e9q82.apps.googleusercontent.com",
+          "client_id": "405743454899-ddgogd83ut2mb05bdvgim61l1h90dlip.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ghtdeveloper.my_uasd_bani",
             "certificate_hash": "ab00bbeba2667f2ade302b6a535d56f8a91a4554"
           }
-        },
-        {
-          "client_id": "405743454899-1uckbdgde8v9kpoh4coi30ugphmufdmn.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBN9Dqj3bHbTHK3H-bp3ia7iNHgYFpWkPU"
+          "current_key": "AIzaSyCDWdMYAdMlo5qZ-ePMOnwLytbaNCGM2c0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "405743454899-1uckbdgde8v9kpoh4coi30ugphmufdmn.apps.googleusercontent.com",
+              "client_id": "405743454899-a74a857ci4e9jcmeesnsr4u7tq08fj7o.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -195,6 +195,7 @@ public class NavMenuPrincipal extends AppCompatActivity {
                 if(account != null)
                 {
                    FirebaseAuth.getInstance().signOut();
+
                 }
                 mostrarPantallaLogin();
 
@@ -211,11 +212,6 @@ public class NavMenuPrincipal extends AppCompatActivity {
         dialog.show();
     }//Fin del metodo cerrarSesion
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        FirebaseAuth.getInstance().signOut();
-    }
 
     /*
         Metodo para mostrar el login
@@ -227,4 +223,9 @@ public class NavMenuPrincipal extends AppCompatActivity {
                 .makeSceneTransitionAnimation(this).toBundle());
     }//Fin del metodo mostrarPantallaLogin
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        account = null;
+    }
 }//Fin de la class NavMenu

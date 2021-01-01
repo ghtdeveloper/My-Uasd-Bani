@@ -40,7 +40,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutCorreoUsuario"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="320dp"
+                android:layout_width="295dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
                 android:textColorHint="@android:color/black"
@@ -65,9 +65,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutClaveUsuario"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="320dp"
+                android:layout_width="295dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="42dp"
+                android:layout_marginTop="25dp"
                 android:textColorHint="@android:color/black"
                 app:boxBackgroundMode="outline"
                 app:boxStrokeColor="@color/accent"
@@ -93,9 +93,9 @@
 
             <Button
                 android:id="@+id/btnAcceder"
-                android:layout_width="145dp"
+                android:layout_width="195dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/stylebutton"
                 android:text="@string/textAcceder"
                 android:textColor="@color/color_white"
@@ -106,9 +106,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayoutClaveUsuario" />
 
+            <TextView
+                android:id="@+id/textViewResetClave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/textResetClave"
+                android:textColor="@color/primary_dark"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="97dp"
+                tools:layout_editor_absoluteY="618dp" />
+
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textViewAccederCon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -119,24 +131,40 @@
                 tools:layout_editor_absoluteX="97dp"
                 tools:layout_editor_absoluteY="618dp" />
 
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/sign_in_button"
-                android:layout_width="wrap_content"
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                tools:layout_editor_absoluteX="142dp"
-                tools:layout_editor_absoluteY="653dp" />
+                android:layout_marginTop="10dp"
+                android:gravity="center">
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/imageViewAccesGoogle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="0dp"
+                    android:contentDescription="@string/textContentDescription"
+                    app:srcCompat="@drawable/googleg_standard_color_18" />
+
+
+            </RelativeLayout>
+
+
         </LinearLayout>
     </ScrollView>
 
     <ImageView
         android:id="@+id/imageViewIconoApp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
+        android:layout_width="289dp"
+        android:layout_height="145dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="42dp"
         android:contentDescription="@string/textContentImage"
+        android:scaleType="centerCrop"
         android:src="@drawable/imagen_app"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
