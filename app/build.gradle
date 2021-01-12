@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
@@ -62,5 +63,8 @@ dependencies {
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //SendGrid
+    //implementation'com.sendgrid:sendgrid-java:4.0.1'
 
 }

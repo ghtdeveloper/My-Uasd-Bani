@@ -127,7 +127,7 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
         //Configuracion Toolbar
         Toolbar toolbar = findViewById(R.id.toolbarReg);
         toolbar.setTitle(R.string.textToolbarRegistroUsuario);
-        toolbar.setSubtitleTextColor(Color.WHITE);
+        toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
 
         //Spinner

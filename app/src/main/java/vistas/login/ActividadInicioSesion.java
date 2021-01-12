@@ -26,6 +26,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
@@ -33,6 +34,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import java.io.IOException;
 import java.util.Objects;
 import contratos.Contratos;
 import herramientas.Transiciones;
@@ -115,7 +117,7 @@ public class ActividadInicioSesion extends AppCompatActivity implements Transici
     public void init()
     {
         //Cast a  las vistas
-        TextView textViewRegistroUsuario = findViewById(R.id.textviewNoRegistrado);
+        TextView textViewRegistroUsuario = findViewById(R.id.textRegistraste);
         TextView textViewResetClave  = findViewById(R.id.textViewResetClave);
         textInputLayoutCorreo = findViewById(R.id.textInputLayoutCorreoUsuario);
         textInputLayoutClave = findViewById(R.id.textInputLayoutClaveUsuario);
@@ -179,7 +181,9 @@ public class ActividadInicioSesion extends AppCompatActivity implements Transici
         final AlertDialog dialogReset = builder.create();
         //Cast a las vistas
         ImageButton btnCerrarDialogo = dialogView.findViewById(R.id.btnCerrarDialogoReset);
-
+        Button btnEnviarCorreo = dialogView.findViewById(R.id.btnReiniciarClave);
+        final TextInputEditText textInputEditTextCorreo = dialogView.findViewById
+                (R.id.txtCorreoUsuarioReset);
 
         /*
             Listeners
@@ -188,6 +192,26 @@ public class ActividadInicioSesion extends AppCompatActivity implements Transici
             @Override
             public void onClick(View v) {
                 dialogReset.dismiss();
+            }
+        });
+        btnEnviarCorreo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+               if(Objects.requireNonNull(textInputEditTextCorreo.getText()).toString().isEmpty())
+               {
+                   Toast.makeText(ActividadInicioSesion.this,
+                           "Debe de especifcar un correo",
+                           Toast.LENGTH_LONG).show();
+                   dialogReset.dismiss();
+               }
+               else
+               {
+                   //enviarCorreo(textInputEditTextCorreo.getText().toString());
+                   Toast.makeText(getApplicationContext(),
+                           "Correo Enviado exitosamente",Toast.LENGTH_LONG).show();
+                   dialogReset.dismiss();
+               }
             }
         });
          dialogReset.getLayoutInflater();
