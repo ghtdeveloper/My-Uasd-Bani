@@ -163,7 +163,7 @@ public class FragmentMapa extends Fragment implements Contratos.VistaFragmentoMa
         btnLiceoBillini.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                latLngPos = new LatLng(19.737178, -71.449973);
+                latLngPos = new LatLng(18.2776071, -70.3377431);
                 googleMap.addMarker(new MarkerOptions().title("Liceo Francisco Gregorio Billini")
                         .position(latLngPos));
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngPos,zoom));

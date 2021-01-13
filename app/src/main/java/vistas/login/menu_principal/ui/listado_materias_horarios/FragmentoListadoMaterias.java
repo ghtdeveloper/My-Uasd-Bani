@@ -108,7 +108,7 @@ public class FragmentoListadoMaterias extends Fragment implements Contratos.
         //Texto Toolbar
 
         Objects.requireNonNull(((AppCompatActivity) requireActivity())
-                .getSupportActionBar()).setTitle("Listado de materias y horarios");
+                .getSupportActionBar()).setTitle("Materias & Horarios");
         //Icono Toolbar
         Objects.requireNonNull(((AppCompatActivity)
                 requireActivity()).getSupportActionBar())

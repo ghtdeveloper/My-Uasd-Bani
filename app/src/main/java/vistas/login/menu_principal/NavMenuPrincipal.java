@@ -36,7 +36,7 @@ public class NavMenuPrincipal extends AppCompatActivity {
     private TextView textViewCorreoUsuario;
     private TextView textViewOtrosDatos;
     private ImageView imageViewFotoUsuario;
-    private  Toolbar toolbar;
+    private Toolbar toolbar;
     private AppBarConfiguration mAppBarConfiguration;
     //objetos
     private Intent intentMenuPrincipal;
@@ -72,11 +72,11 @@ public class NavMenuPrincipal extends AppCompatActivity {
         Menu navMenu = navigationView.getMenu();
         View hView = navigationView.getHeaderView(0);
 
-                // Passing each menu ID as a set of Ids because each
+        // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_listado_materias, R.id.nav_informacion, R.id.nav_mapa,
-                R.id.nav_cerrar_sesion,R.id.nav_mi_perfil)
+                R.id.nav_cerrar_sesion, R.id.nav_mi_perfil)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this,
@@ -93,52 +93,46 @@ public class NavMenuPrincipal extends AppCompatActivity {
         //Se especifica el metodo de acceso
         definirMetodoAcceso();
         //Se asigna la imagen al perfil del usuario
-       Picasso.with(getApplicationContext()).load(uriPictUsuario).into(imageViewFotoUsuario);
+        Picasso.with(getApplicationContext()).load(uriPictUsuario).into(imageViewFotoUsuario);
 
         // Cerrar sesion
         navMenu.findItem(R.id.nav_cerrar_sesion).
-                setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener()
-                {
-            @Override
-            public boolean onMenuItemClick(MenuItem item)
-            {
-                mostrarDialogoCerrarSesion();
-                return false;
-            }
-        });
+                setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        mostrarDialogoCerrarSesion();
+                        return false;
+                    }
+                });
     }//Fin del metodo onCreate
 
-    private void definirMetodoAcceso()
-    {
+
+    private void definirMetodoAcceso() {
         /*
             Se debe verificar que metodo de acceso esta utilizando el usuario
             para la toma de decisiones
          */
-        if(ActividadInicioSesion.TYPE_ACCESS == 1)
-        {
+        if (ActividadInicioSesion.TYPE_ACCESS == 1) {
             cargarDatosAccesoUsuarioNormal();
         }
-        if(ActividadInicioSesion.TYPE_ACCESS == 2)
-        {
+        if (ActividadInicioSesion.TYPE_ACCESS == 2) {
             cargarDatosAccesoUsuarioApiGoogle();
         }
     }//Fin del metodo definirMetodoAcceso
-
 
 
     /*
         Se define el metodo para cargar los datos
         del usuario conectado via el metodo normal de acceso.
      */
-    private void cargarDatosAccesoUsuarioNormal()
-    {
+    private void cargarDatosAccesoUsuarioNormal() {
         intentMenuPrincipal = getIntent();
         textViewNombreCompletoUsuario.setText(intentMenuPrincipal.getStringExtra
-               ("nombreCompleto"));
+                ("nombreCompleto"));
         textViewCorreoUsuario.setText(intentMenuPrincipal.getStringExtra("correoUsuario"));
         textViewOtrosDatos.setText(intentMenuPrincipal.getStringExtra("otrosDatos"));
         idUsuario = intentMenuPrincipal.getStringExtra("idUsuario");
-        uriPictUsuario =Uri.parse(intentMenuPrincipal.getStringExtra("urlPict"));
+        uriPictUsuario = Uri.parse(intentMenuPrincipal.getStringExtra("urlPict"));
         facultadUsuario = intentMenuPrincipal.getStringExtra("facultadUsuario");
     }//Fin del metodo cargarDatosUsuarioConectado
 
@@ -177,6 +171,7 @@ public class NavMenuPrincipal extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        moveTaskToBack(true);
     }//No retroceder
 
     /**
@@ -228,4 +223,6 @@ public class NavMenuPrincipal extends AppCompatActivity {
         super.onDestroy();
         account = null;
     }
+
+
 }//Fin de la class NavMenu

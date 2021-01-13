@@ -362,4 +362,5 @@ public class ActividadInicioSesion extends AppCompatActivity implements Transici
         objPresentador = null;
     }//Fin del metodo onDestroy
 
+
 }//Fin de la clase ActividadInicioSesion
