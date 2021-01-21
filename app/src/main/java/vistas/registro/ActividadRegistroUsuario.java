@@ -338,6 +338,8 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
     @Override
     public void mostrarProgressBar()
     {
+        subirImagenes();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(ActividadRegistroUsuario.this);
         LayoutInflater inflater = getLayoutInflater();
         View viewDialogo = inflater.inflate(R.layout.layout_dialogo_progress_bar,null);
@@ -357,7 +359,6 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
                                 mostrarActividadLogin();
                                 Toast.makeText(getApplicationContext(),"Registro completado",
                                         Toast.LENGTH_LONG).show();
-                                subirImagenes();
                             }
                         });
                     } catch (InterruptedException e) {
