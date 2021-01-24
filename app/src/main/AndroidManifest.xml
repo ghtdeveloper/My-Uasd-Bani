@@ -41,12 +41,15 @@
         <activity
             android:name="vistas.login.menu_principal.NavMenuPrincipal"
             android:label="@string/title_activity_nav_menu_principal"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="vistas.registro.ActividadRegistroUsuario"
+            android:screenOrientation="portrait"
             android:theme="@style/materialDesignbyLogin" />
         <activity
             android:name="vistas.login.ActividadInicioSesion"
+            android:screenOrientation="portrait"
             android:theme="@style/materialDesignbyLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

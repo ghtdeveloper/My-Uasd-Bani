@@ -128,8 +128,6 @@ public class FragmentMapa extends Fragment implements Contratos.VistaFragmentoMa
                     }
                 });
                 googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLngPos));
-
-
             }
         });
         btnEscuelaCabral.setOnClickListener(new View.OnClickListener() {
