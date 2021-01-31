@@ -7,9 +7,7 @@ import com.google.firebase.storage.StorageReference;
 
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Creado por Edison Martinez on 07,Saturday,2020
- **/
+
 public class CasoUsoSubirImagenes {
     /**
      * TAG INFO

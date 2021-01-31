@@ -8,9 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import vistas.login.menu_principal.ui.informacion.InfoUasd.FragmentoInfoUasd1;
 import vistas.login.menu_principal.ui.informacion.InfoUasd.FragmentoInfoUasd2;
 
-/**
- * Creado por Edison Martinez on 08,Sunday,2020
- **/
+
 public class AdaptadorColeccionPagInfoUASD extends FragmentStatePagerAdapter
 {
 

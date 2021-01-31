@@ -209,7 +209,16 @@ public class FragmentoMiPerfil extends Fragment implements Contratos.VistaFragme
                         facultadObtenida = documentSnapshot.getString("facultad");
                        carreraObtenida = documentSnapshot.getString("carrera");
 
-                       uriImageProfile = Uri.parse(documentSnapshot.getString("urlFotoPerfil"));
+                       if(documentSnapshot.getString("urlFotoPerfil") == null)
+                       {
+                           uriImageProfile = Uri.parse("android.resource.com.ghtdeveloper.my_uasd_bani"+
+                                   R.drawable.img_perfil_unknow);
+                       }
+                       else
+                       {
+                           uriImageProfile = Uri.parse(documentSnapshot.getString("urlFotoPerfil"));
+                       }
+
                        Picasso.with(getContext()).load(uriImageProfile).into(imageViewFotoPerfil);
 
                    }

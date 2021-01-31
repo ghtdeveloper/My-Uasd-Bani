@@ -10,9 +10,7 @@ import vistas.login.menu_principal.ui.informacion.infoEstudianteUasd.FragmentoIn
 import vistas.login.menu_principal.ui.informacion.infoEstudianteUasd.FragmentoInfoEstudiante2;
 import vistas.login.menu_principal.ui.informacion.infoEstudianteUasd.FragmentoInfoEstudiante3;
 
-/**
- * Creado por Edison Martinez on 08,Sunday,2020
- **/
+
 public class AdaptadorColeccionPaginaInfoEstudiante  extends FragmentStatePagerAdapter
 {
 

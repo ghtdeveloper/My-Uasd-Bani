@@ -11,9 +11,7 @@ import com.ghtdeveloper.my_uasd_bani.R;
 import com.ghtdeveloper.my_uasd_bani.modelo.Materias;
 import adaptadores_vistas.AdaptadorVistaListItem;
 
-/**
- * Creado por Edison Martinez on 09,Monday,2020
- **/
+
 public class AdaptadorListMaterias extends FirestoreRecyclerAdapter<Materias, AdaptadorVistaListItem>
 {
     //Interfaz

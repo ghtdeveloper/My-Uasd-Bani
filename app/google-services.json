@@ -29,6 +29,14 @@
             "package_name": "com.ghtdeveloper.my_uasd_bani",
             "certificate_hash": "9d51f07a8a08a3ff797e634b4dc64e548a184f79"
           }
+        },
+        {
+          "client_id": "405743454899-i42lr2r7tvfpa5m7fp40gk6rcja66r68.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ghtdeveloper.my_uasd_bani",
+            "certificate_hash": "5d18f64e8c23a26a007c7931732de1ba6817c1ec"
+          }
         }
       ],
       "api_key": [

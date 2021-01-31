@@ -31,9 +31,7 @@ import casos_usos.CasoUsoSubirImagenes;
 import contratos.Contratos;
 import vistas.login.menu_principal.NavMenuPrincipal;
 
-/**
- * Creado por Edison Martinez on 02,Monday,2020
- **/
+
 public class Presentador extends View implements Contratos.Presentador
 {
     //Objetos Casos de uso

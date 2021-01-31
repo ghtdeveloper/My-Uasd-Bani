@@ -1,8 +1,6 @@
 package com.ghtdeveloper.my_uasd_bani.modelo;
 
-/**
- * Creado por Edison Martinez on 09,Monday,2020
- **/
+
 public class Materias
 {
     //Variables

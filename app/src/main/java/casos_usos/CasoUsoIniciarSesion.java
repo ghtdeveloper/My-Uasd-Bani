@@ -3,9 +3,7 @@ package casos_usos;
 import android.content.Context;
 import com.google.firebase.firestore.Query;
 
-/**
- * Creado por Edison Martinez on 02,Monday,2020
- **/
+
 public class CasoUsoIniciarSesion
 {
     /**Objeto Firebase para la conexion**/

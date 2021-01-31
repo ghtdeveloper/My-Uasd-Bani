@@ -5,9 +5,7 @@ import android.util.Log;
 
 import com.google.firebase.firestore.DocumentReference;
 
-/**
- * Creado por Edison Martinez on 05,Thursday,2020
- **/
+
 public class CasoUsoActualizar
 {
     /**Variable TAG INFO**/

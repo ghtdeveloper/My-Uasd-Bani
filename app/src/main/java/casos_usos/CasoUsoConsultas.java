@@ -7,9 +7,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Query;
 
-/**
- * Creado por Edison Martinez on 03,Tuesday,2020
- **/
+
 public class CasoUsoConsultas
 {
     /**Variable TAG INFO**/

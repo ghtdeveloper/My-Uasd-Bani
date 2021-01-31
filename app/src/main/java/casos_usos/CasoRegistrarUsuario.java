@@ -8,9 +8,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 
-/**
- * Creado por Edison Martinez on 02,Monday,2020
- **/
+
 public class CasoRegistrarUsuario
 {
    /** Variable INFO TAG**/

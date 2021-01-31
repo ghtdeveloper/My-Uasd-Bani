@@ -10,9 +10,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.StorageReference;
 import java.util.Date;
 
-/**
- * Creado por Edison Martinez on 14,Wednesday,2020
- **/
+
 public interface Contratos
 {
     interface  VistaActividadInicioSesion

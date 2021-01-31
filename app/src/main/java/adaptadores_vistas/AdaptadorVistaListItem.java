@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ghtdeveloper.my_uasd_bani.R;
 
-/**
- * Creado por Edison Martinez on 09,Monday,2020
- **/
+
 public class AdaptadorVistaListItem  extends RecyclerView.ViewHolder
 {
     //Vistas

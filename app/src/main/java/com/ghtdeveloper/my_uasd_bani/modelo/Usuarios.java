@@ -7,9 +7,7 @@ import androidx.annotation.NonNull;
 
 import java.util.Date;
 
-/**
- * Creado por Edison Martinez on 02,Monday,2020
- **/
+
 public class Usuarios
 {
 
