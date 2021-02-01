@@ -31,8 +31,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:paddingBottom="?attr/actionBarSize"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="?attr/actionBarSize">
 
 
             <com.mikhaellopez.circularimageview.CircularImageView

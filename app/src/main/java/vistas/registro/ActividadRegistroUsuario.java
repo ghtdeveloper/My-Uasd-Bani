@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -44,6 +46,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
@@ -88,6 +91,7 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
     private static String carreraSelect;
     private final int REQUEST_CAMERA =0;
     private final int REQUEST_GALERIA =1;
+    double progressStatus=0;
 
 
     @Override
@@ -168,7 +172,6 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
         });
-
     }//Fin del metodo init
 
 
@@ -184,6 +187,9 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
             assert  bundle != null;
             bitmapPict = (Bitmap) bundle.get("data");
             imageViewUsuario.setImageBitmap(bitmapPict);
+
+
+
         }//Fin del if captura camara
 
         if(requestCode == REQUEST_GALERIA && resultCode == RESULT_OK)
@@ -272,14 +278,15 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
                 textInputLayoutConfirmPassword.setError("");
 
                 //Se registra el usaurio
+
                 objPresentador.registrarUsuario(new Usuarios(Objects.requireNonNull(txtPrimerNombre.
                         getText()).toString(), Objects.requireNonNull(txtPrimerApellido.getText()).
                         toString(), Objects.requireNonNull(txtCorreo.getText()).toString(),
                         facultadSelect,carreraSelect, Presentador.encodePassword
                         (Objects.requireNonNull(txtPassword.getText()).toString()),objPresentador.
-                        establecerFechaCreacion(getApplicationContext())));
+                        establecerFechaCreacion(getApplicationContext()),PerfilPict.urlFotoPerfil));
                 //Se muestra el progress Bar
-                mostrarProgressBar();//Mejorar esto
+                mostrarProgressBar();
             }
         }
     }//Fin del metodo registrarNuevoUsuario
@@ -338,6 +345,8 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
     @Override
     public void mostrarProgressBar()
     {
+        subirImagenes();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(ActividadRegistroUsuario.this);
         LayoutInflater inflater = getLayoutInflater();
         View viewDialogo = inflater.inflate(R.layout.layout_dialogo_progress_bar,null);
@@ -353,6 +362,7 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
                          runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
                                 dialog.dismiss();
                                 mostrarActividadLogin();
                                 Toast.makeText(getApplicationContext(),"Registro completado",
@@ -371,6 +381,8 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
         dialog.show();
 
     }//Fin del metodo mostrarProgressBar
+
+
 
     @Override
     public void intentCapturaFoto()
@@ -405,7 +417,7 @@ public class ActividadRegistroUsuario extends AppCompatActivity  implements
     {
         Bitmap bitmapPictUsuario = ((BitmapDrawable) imageViewUsuario.getDrawable()).getBitmap();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmapPictUsuario.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        bitmapPictUsuario.compress(Bitmap.CompressFormat.PNG,45,byteArrayOutputStream);
         //Byte Data Imagen
         byte[] dataPict = byteArrayOutputStream.toByteArray();
         /*

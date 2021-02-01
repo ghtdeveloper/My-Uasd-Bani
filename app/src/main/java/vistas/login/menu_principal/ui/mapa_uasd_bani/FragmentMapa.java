@@ -23,7 +23,6 @@ import com.google.android.material.chip.Chip;
 import java.util.Objects;
 import contratos.Contratos;
 
-
 public class FragmentMapa extends Fragment implements Contratos.VistaFragmentoMapa,
         OnMapReadyCallback
 {
@@ -112,8 +111,7 @@ public class FragmentMapa extends Fragment implements Contratos.VistaFragmentoMa
         //Vistas
         final float zoom = 180.0f;
         map = googleMap;
-
-
+        
         btnUasdBani.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,6 +191,5 @@ public class FragmentMapa extends Fragment implements Contratos.VistaFragmentoMa
             }
         });
     }//Fin del metodo onMapReady
-
 
 }//Fin de la class FragmentMapa

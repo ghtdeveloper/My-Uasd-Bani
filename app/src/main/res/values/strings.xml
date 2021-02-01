@@ -51,6 +51,7 @@
     <!--Dialogo Progress Bar-->
     <string name="textMensajePorgressBar" tools:ignore="Typos">Por favor espere</string>
     <string name="textProcesandoDialogo">Procesando…</string>
+    <string name="textProcesandoImagen">Subiedo imagen.…</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--Btn Menu-->

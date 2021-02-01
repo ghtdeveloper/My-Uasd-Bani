@@ -28,7 +28,7 @@ public class Usuarios
         Se define el constructor de la clase
      */
     public Usuarios( String nb, String ap, String co, String fc, String ca, String clave,
-                    Date fechaRegistro)
+                    Date fechaRegistro,String urlFotoPerfil)
     {
         this.nombre = nb;
         this.apellido = ap;
@@ -37,6 +37,7 @@ public class Usuarios
         this.carrera = ca;
         this.claveAcceso = clave;
         this.fechaRegistro = fechaRegistro;
+        this.urlFotoPerfil = urlFotoPerfil;
     }//Fin del constructor de la clase
 
     public Usuarios(Context context) { }
