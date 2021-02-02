@@ -157,6 +157,7 @@ public class NavMenuPrincipal extends AppCompatActivity {
             uriPictUsuario = account.getPhotoUrl();
             Picasso.with(getApplicationContext()).load(uriPictUsuario).into(imageViewFotoUsuario);
         }
+        facultadUsuario ="Ciencias";
     }//Fin del metodo cargarDatosUsuarioConectado
 
 
